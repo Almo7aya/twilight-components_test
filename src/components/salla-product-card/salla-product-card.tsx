@@ -177,6 +177,7 @@ export class SallaProductCard {
     };
     return (
       <Host id={`product-${this.productData?.id}`} class={classes}>
+        <h1>This is a test</h1>
         <div class={!this.fullImage ? 's-product-card-image' : 's-product-card-image-full'}>
           <a href={this.productData?.url}>
             <img class={`s-product-card-image-${salla.url.is_placeholder(this.productData?.image?.url)
