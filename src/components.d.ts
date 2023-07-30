@@ -5,57 +5,3850 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
+import { Color, Options } from "./components/salla-color-picker/interfaces";
+import { DateLimit, DateOption, LocaleKey } from "./components/salla-datetime-picker/interfaces";
+import { FilePondFile } from "./components/salla-file-upload/interfaces";
+import { FilePondErrorDescription } from "filepond/types/index";
+import { Filter } from "./components/salla-filters/interfaces";
+import { Item, LoyaltyProgram } from "./components/salla-loyalty/loyalty-schema";
+import { Donation, Option } from "./components/salla-product-options/interfaces";
+import { Phone } from "./components/salla-tel-input/interfaces";
+export { Color, Options } from "./components/salla-color-picker/interfaces";
+export { DateLimit, DateOption, LocaleKey } from "./components/salla-datetime-picker/interfaces";
+export { FilePondFile } from "./components/salla-file-upload/interfaces";
+export { FilePondErrorDescription } from "filepond/types/index";
+export { Filter } from "./components/salla-filters/interfaces";
+export { Item, LoyaltyProgram } from "./components/salla-loyalty/loyalty-schema";
+export { Donation, Option } from "./components/salla-product-options/interfaces";
+export { Phone } from "./components/salla-tel-input/interfaces";
 export namespace Components {
-    interface MyComponent {
+    interface SallaAddProductButton {
         /**
-          * The first name
+          * Channels.
          */
-        "first": string;
+        "channels": string;
         /**
-          * The last name
+          * Donating amount.
          */
-        "last": string;
+        "donatingAmount": number;
         /**
-          * The middle name
+          * Listen to product options availability.
          */
-        "middle": string;
+        "notifyOptionsAvailability": boolean;
+        /**
+          * Product id
+         */
+        "productId": any;
+        /**
+          * Product Status.Defaults to `sale`
+         */
+        "productStatus": 'sale' | 'out' | 'out-and-notify';
+        /**
+          * Product type. Defaults to `product`
+         */
+        "productType": 'product' | 'service' | 'codes' | 'digital' | 'food' | 'donating' | 'group_products' | 'booking';
+        /**
+          * Product Quantity
+         */
+        "quantity": number;
+        /**
+          * Support Quick Pay Button
+         */
+        "quickBuy": boolean;
+        /**
+          * Subscribed Options ex: "[[139487,2394739],[1212,1544]]"
+         */
+        "subscribedOptions": string;
+        /**
+          * Support themes that have a sticky bar
+         */
+        "supportStickyBar": boolean;
+    }
+    interface SallaBottomAlert {
+        /**
+          * Button label - used when type is link and popup
+         */
+        "actionLabel": string;
+        /**
+          * Button url - used when type is link
+         */
+        "actionUrl": string;
+        /**
+          * Alert Icon class from salla icons library - ex: sicon-user
+         */
+        "icon": string;
+        /**
+          * Alert Message
+         */
+        "message": string;
+        /**
+          * Alert Type
+         */
+        "type": 'link' | 'popup' | 'banner';
+    }
+    interface SallaButton {
+        /**
+          * Button Color
+         */
+        "color": 'primary' | 'success' | 'warning' | 'danger' | 'light' | 'gray' | 'dark';
+        /**
+          * Add `disabled` attribute
+         */
+        "disable": () => Promise<HTMLElement>;
+        /**
+          * Is the button currently disabled
+         */
+        "disabled": boolean;
+        /**
+          * Remove `disabled` attribute
+         */
+        "enable": () => Promise<HTMLElement>;
+        /**
+          * Button Fill
+         */
+        "fill": 'solid' | 'outline' | 'none';
+        /**
+          * Button with href as normal link
+         */
+        "href": string;
+        /**
+          * Run loading animation
+         */
+        "load": () => Promise<HTMLElement>;
+        /**
+          * If there is need to change loader position, pass the position
+         */
+        "loaderPosition": 'start' | 'end' | 'center' | 'after';
+        /**
+          * Is the button currently loading
+         */
+        "loading": boolean;
+        /**
+          * Changing the body of the button
+          * @param html
+         */
+        "setText": (html: string) => Promise<HTMLElement>;
+        /**
+          * Button Type
+         */
+        "shape": 'link' | 'icon' | 'btn';
+        /**
+          * Button Size
+         */
+        "size": 'small' | 'large' | 'medium';
+        /**
+          * Stop loading animation
+         */
+        "stop": () => Promise<HTMLElement>;
+        /**
+          * Button Width
+         */
+        "width": 'wide' | 'normal';
+    }
+    interface SallaCartSummary {
+        /**
+          * Animate product Image to cart summary
+          * @param image the image element to animate
+         */
+        "animateToCart": (image: any) => Promise<void>;
+        /**
+          * Show cart label
+         */
+        "showCartLabel": boolean;
+    }
+    interface SallaColorPicker {
+        /**
+          * Close/Hide the picker.
+         */
+        "closePicker": () => Promise<void>;
+        /**
+          * Initial color for the picker.
+         */
+        "color": string;
+        /**
+          * Release all resources used by this picker instance.
+         */
+        "destroyPicker": () => Promise<void>;
+        /**
+          * Whether to enable adjusting the alpha channel.
+         */
+        "enableAlpha": boolean;
+        /**
+          * How to display the selected color in the text field (the text field still supports input in any format).
+         */
+        "format": 'hex' | 'hsl' | 'rgb';
+        /**
+          * Move the popup to a different parent, optionally opening it at the same time.  (Usually a new .parent and .color).
+          * @param option Whether to open the popup immediately.
+          * @param openImmediately
+         */
+        "movePopUp": (options: Options, openImmediately: boolean) => Promise<void>;
+        /**
+          * File input name for the native formData
+         */
+        "name": string;
+        /**
+          * Show/open the picker.
+         */
+        "openPicker": () => Promise<void>;
+        /**
+          * Set if the color picker input is required or not
+         */
+        "required": boolean;
+        /**
+          * Set/initialize the picker's color.  Color name, RGBA/HSLA/HEX string, or RGBA array.
+          * @param color If true, won't trigger onChange.
+          * @param triggerEvent
+         */
+        "setColorValue": (color: string, triggerEvent: boolean) => Promise<void>;
+        /**
+          * Set the picker options.  (Usually a new .parent and .color).
+          * @param options
+         */
+        "setPickerOption": (options: Options) => Promise<void>;
+        /**
+          * Whether to have a "Cancel" button which closes the popup.
+         */
+        "showCancelButton": boolean;
+        /**
+          * Whether to show a text field for color value editing.
+         */
+        "showTextField": boolean;
+    }
+    interface SallaCommentForm {
+        /**
+          * The ID of the item(as defined in the type), where the comment is for. defaults to `salla.config.get('page.id')`
+         */
+        "itemId"?: string | number;
+        /**
+          * To show the avatar or not in the comment form
+         */
+        "showAvatar": boolean;
+        /**
+          * Type of entity the comment is being submitted for. Defaults to `salla.url.is_page('page-single') ? 'page' : 'product'`
+         */
+        "type": 'product' | 'page';
+    }
+    /**
+     * its to easy to use, currenlty its support select & checkbox input as trigger for show/hide the dom
+     * the dom you can put it like this data-show-when="{name of the field} {= or !=} {value of the field}"
+     */
+    interface SallaConditionalFields {
+    }
+    interface SallaCountDown {
+        /**
+          * If true, the count down numbers will be appear in a boxes
+         */
+        "boxed": boolean;
+        /**
+          * The color of the count down
+         */
+        "color": 'primary' | 'light' | 'dark';
+        /**
+          * The date to count down to Format: MMM DD, YYYY HH:mm:ss (e.g. Jan 2, 2023 16:37:52)
+         */
+        "date": string;
+        /**
+          * The digits lang to show in the count down
+         */
+        "digits": 'en' | 'auto';
+        /**
+          * End the count down
+         */
+        "endCountDown": () => Promise<void>;
+        /**
+          * If true, the count down will end at the end of the day
+         */
+        "endOfDay": boolean;
+        /**
+          * The text to show when the count down ends
+         */
+        "endText": string;
+        /**
+          * Show labels for each count down number
+         */
+        "labeled": boolean;
+        /**
+          * The size of the count down
+         */
+        "size": 'sm' | 'md' | 'lg';
+    }
+    interface SallaDatetimePicker {
+        /**
+          * Allows the user to enter a date directly into the input field. By default, direct entry is disabled.
+         */
+        "allowInput": boolean;
+        /**
+          * Allows the preloading of an invalid date. When disabled, the field will be cleared if the provided date is invalid
+         */
+        "allowInvalidPreload": boolean;
+        /**
+          * Exactly the same as date format, but for the altInput field.
+         */
+        "altFormat": string;
+        /**
+          * Show the user a readable date (as per altFormat), but return something totally different to the server.
+         */
+        "altInput": boolean;
+        /**
+          * This class will be added to the input element created by the altInput option. Note that altInput already inherits classes from the original input.
+         */
+        "altInputClass": string;
+        /**
+          * Instead of body, appends the calendar to the specified node instead.
+         */
+        "appendTo": HTMLElement;
+        /**
+          * Defines how the date will be formatted in the aria-label for calendar days, using the same tokens as dateFormat. If you change this, you should choose a value that will make sense if a screen reader reads it out loud.
+         */
+        "ariaDateFormat": string;
+        /**
+          * Whether the default time should be auto-filled when the input is empty and gains or loses focus.
+         */
+        "autoFillDefaultTime": boolean;
+        /**
+          * Whether clicking on the input should open the picker. Set it to false if you only want to open the calendar programmatically with [open()]
+         */
+        "clickOpens": boolean;
+        /**
+          * Whether calendar should close after date selection or not
+         */
+        "closeOnSelect": boolean;
+        /**
+          * When in "multiple" mode, conjunction is used to separate dates in the entry field.
+         */
+        "conjunction"?: string;
+        /**
+          * A string of characters which are used to define how the date will be displayed in the input box. The supported characters are defined in the table below.
+         */
+        "dateFormat": string;
+        /**
+          * A custom datestring parser
+         */
+        "dateParser": (date: string, format: string) => Date;
+        /**
+          * Sets the initial selected date(s). If you're using mode: "multiple" or a range calendar supply an Array of Date objects or an Array of date strings which follow your dateFormat. Otherwise, you can supply a single Date object or a date string.
+         */
+        "defaultDate": DateOption | DateOption[];
+        /**
+          * Initial value of the hour element, when no date is selected
+         */
+        "defaultHour": number;
+        /**
+          * Initial value of the minute element, when no date is selected
+         */
+        "defaultMinute": number;
+        /**
+          * Initial value of the seconds element, when no date is selected
+         */
+        "defaultSeconds": number;
+        /**
+          * Disables certain dates, preventing them from being selected. See https://chmln.github.io/flatpickr/examples/#disabling-specific-dates
+         */
+        "disable": DateLimit<DateOption>[];
+        /**
+          * Set this to true to always use the non-native picker on mobile devices. By default, Flatpickr utilizes native datetime widgets unless certain options (e.g. disable) are used.
+         */
+        "disableMobile": boolean;
+        /**
+          * Disables all dates except these specified. See https://chmln.github.io/flatpickr/examples/#disabling-all-dates-except-select-few
+         */
+        "enable": DateLimit<DateOption>[];
+        /**
+          * Enables seconds selection in the time picker.
+         */
+        "enableSeconds": boolean;
+        /**
+          * Enables the time picker
+         */
+        "enableTime": boolean;
+        /**
+          * Allows using a custom date formatting function instead of the built-in handling for date formats using dateFormat, altFormat, etc.
+         */
+        "formatDate": (date: Date, format: string, locale: Object) => string;
+        /**
+          * Adjusts the step for the hour input (incl. scrolling)
+         */
+        "hourIncrement": number;
+        /**
+          * Displays the calendar inline
+         */
+        "inline": boolean;
+        /**
+          * The locale, either as a string (e.g. "ar", "en") or as an object. See https://chmln.github.io/flatpickr/localization/
+         */
+        "locale": LocaleKey;
+        /**
+          * The maximum date that a user can pick to (inclusive).
+         */
+        "maxDate": DateOption;
+        /**
+          * The minimum date that a user can start picking from (inclusive).
+         */
+        "maxTime": DateOption;
+        /**
+          * The minimum date that a user can start picking from (inclusive).
+         */
+        "minDate": DateOption;
+        /**
+          * The minimum time that a user can start picking from (inclusive).
+         */
+        "minTime": DateOption;
+        /**
+          * Adjusts the step for the minute input (incl. scrolling) Defaults to 5
+         */
+        "minuteIncrement": number;
+        /**
+          * Date selection mode, defaults to "single"
+         */
+        "mode": "single" | "multiple" | "range" | "time";
+        /**
+          * How the month should be displayed in the header of the calendar. If showMonths has a value greater than 1, the month is always shown as static.
+         */
+        "monthSelectorType": "dropdown" | "static";
+        /**
+          * the name for the input
+         */
+        "name": string;
+        /**
+          * HTML for the arrow icon, used to switch months.
+         */
+        "nextArrow": string;
+        /**
+          * Hides the day selection in calendar. Use it along with enableTime to create a time picker.
+         */
+        "noCalendar": boolean;
+        /**
+          * Placeholder text to show on the input element
+         */
+        "placeholder": string;
+        /**
+          * How the calendar should be positioned with regards to the input. Defaults to "auto"
+         */
+        "position": "auto" | "above" | "below" | "auto left" | "auto center" | "auto right" | "above left" | "above center" | "above right" | "below left" | "below center" | "below right" | ((self: any, customElement: HTMLElement | undefined) => void);
+        /**
+          * The element off of which the calendar will be positioned. Defaults to the date input
+         */
+        "positionElement": HTMLElement;
+        /**
+          * HTML for the left arrow icon, used to switch months.
+         */
+        "prevArrow": string;
+        /**
+          * Whether this input i required or not
+         */
+        "required": boolean;
+        /**
+          * Whether to display the current month name in shorthand mode, e.g. "Sep" instead "September"
+         */
+        "shorthandCurrentMonth": boolean;
+        /**
+          * The number of months to be shown at the same time when displaying the calendar.
+         */
+        "showMonths": number;
+        /**
+          * Position the calendar inside the wrapper and next to the input element*.
+         */
+        "static": boolean;
+        /**
+          * Displays time picker in 24 hour mode without AM/PM selection when enabled.
+         */
+        "time_24hr": boolean;
+        /**
+          * Two way data binding to retrieve the selected date[time] value
+         */
+        "value": string;
+        /**
+          * Enables display of week numbers in calendar.
+         */
+        "weekNumbers": boolean;
+        /**
+          * See https://chmln.github.io/flatpickr/examples/#flatpickr-external-elements
+         */
+        "wrap": boolean;
+    }
+    interface SallaFileUpload {
+        /**
+          * Accepted file types
+         */
+        "accept": string;
+        /**
+          * Enable or disable file browser
+         */
+        "allowBrowse": boolean;
+        /**
+          * Enable or disable drag n' drop
+         */
+        "allowDrop": boolean;
+        /**
+          * Enable or disable adding multiple files
+         */
+        "allowMultiple": boolean;
+        /**
+          * Enable or disable pasting of files. Pasting files is not supported on all browesrs.
+         */
+        "allowPaste": boolean;
+        /**
+          * Enable or disable the process button
+         */
+        "allowProcess": boolean;
+        /**
+          * When set to false the remove button is hidden and disabled
+         */
+        "allowRemove": boolean;
+        /**
+          * Allow users to reorder files with drag and drop interaction. Note that this only works in single column mode. It also only works on browsers that support pointer events.
+         */
+        "allowReorder": boolean;
+        /**
+          * Allow drop to replace a file, only works when allowMultiple is false
+         */
+        "allowReplace": boolean;
+        /**
+          * Enable or disable the revert processing button
+         */
+        "allowRevert": boolean;
+        /**
+          * to prepare the upload url automatically pass this prop, ex to upload attach file in cart Item.
+         */
+        "cartItemId"?: string;
+        /**
+          * Set to true to enable custom validity messages. FilePond will throw an error when a parent form is submitted and it contains invalid files.
+         */
+        "checkValidity": boolean;
+        /**
+          * Force chunks even for files smaller than the set chunkSize
+         */
+        "chunkForce": boolean;
+        /**
+          * Amount of times, and delayes, between retried uploading of a chunk
+         */
+        "chunkRetryDelays": Array<number>;
+        /**
+          * The size of a chunk in bytes
+         */
+        "chunkSize": number;
+        /**
+          * Enable chunked uploads, when enabled will automatically cut up files in chunkSize chunks before upload.
+         */
+        "chunkUploads": boolean;
+        /**
+          * Show credits at the bottom of the upload element. Structure is like [{label,url}]
+         */
+        "credits": false;
+        /**
+          * Sets the disabled attribute to the output field
+         */
+        "disabled": boolean;
+        /**
+          * Require drop on the FilePond element itself to catch the file.
+         */
+        "dropOnElement": boolean;
+        /**
+          * FilePond will catch all files dropped on the webpage
+         */
+        "dropOnPage": boolean;
+        /**
+          * When enabled, files are validated before they are dropped. A file is not added when it's invalid.
+         */
+        "dropValidation": boolean;
+        /**
+          * If current file has id, pass it here, to be passed back in the `removed` event
+         */
+        "fileId"?: number;
+        /**
+          * The uploaded files as json `[{url:"...", id:123}]` for delete possibility
+         */
+        "files": string;
+        /**
+          * Set to true to require the file to be successfully reverted before continuing.
+         */
+        "forceRevert": boolean;
+        /**
+          * json formData to be injected in the submit request
+         */
+        "formData": string;
+        /**
+          * The original height of the uploader, will be used to reset the height after the image is removed.
+         */
+        "height": string;
+        /**
+          * The icon used for process actions
+         */
+        "iconProcess": string;
+        /**
+          * The icon used for remove actions
+         */
+        "iconRemove": string;
+        /**
+          * The icon used for retry actions
+         */
+        "iconRetry": string;
+        /**
+          * The icon used for undo actions
+         */
+        "iconUndo": string;
+        /**
+          * Ignored file names when handling dropped directories. Dropping directories is not supported on all browsers.
+         */
+        "ignoredFiles": Array<any>;
+        /**
+          * Immediately upload new files to the server
+         */
+        "instantUpload": boolean;
+        /**
+          * The interval to use before showing each item being added to the list
+         */
+        "itemInsertInterval": number;
+        /**
+          * Set to 'after' to add files to end of list (when dropped at the top of the list or added using browse or paste), set to 'before' to add files at start of list. Set to a compare function to automatically sort items when added
+         */
+        "itemInsertLocation": 'before' | 'after' | ((a: FilePondFile, b: FilePondFile) => number);
+        /**
+          * The decimal separator used to render numbers. By default this is determined automatically.
+         */
+        "labelDecimalSeparator": string;
+        /**
+          * Default label shown to indicate this is a drop area. FilePond will automatically bind browse file events to the element with CSS class .filepond--label-action
+          * @default `${salla.lang.get('common.uploader.drag_and_drop')}<span class="filepond--label-action"> ${salla.lang.get('common.uploader.browse')} </span>`
+         */
+        "labelIdle": string;
+        /**
+          * The thousdands separator used to render numbers. By default this is determined automatically.
+         */
+        "labelThousandsSeparator": string;
+        /**
+          * The maximum size of a file, for instance 2MB or 750KB
+         */
+        "maxFileSize": `${number}MB` | `${number}KB}`;
+        /**
+          * The maximum number of files that the pond can handle
+         */
+        "maxFilesCount": number;
+        /**
+          * The maxmimum number of files that can be uploaded in parallel
+         */
+        "maxParallelUploads": number;
+        /**
+          * The submit request method.
+         */
+        "method": string;
+        /**
+          * File input name for the native formData
+         */
+        "name"?: string;
+        /**
+          * File input name in the request payload
+         */
+        "payloadName": string;
+        /**
+          * Set the component to be profile image uploader with a preview and a circular shape
+         */
+        "profileImage": boolean;
+        /**
+          * Sets the required attribute to the output field
+         */
+        "required": boolean;
+        /**
+          * Method to set option for filepond
+         */
+        "setOption": (key: string, value: string | number) => Promise<void>;
+        /**
+          * Tells FilePond to store files in hidden file input elements so they can be posted along with normal form post. This only works if the browser supports the DataTransfer constructor (https://caniuse.com/mdn-api_datatransfer_datatransfer), this is the case on Firefox, Chrome, Chromium powered browsers and Safari version 14.1 and higher.
+         */
+        "storeAsFile": boolean;
+        /**
+          * The url to submit the image into.
+         */
+        "url": string;
+        /**
+          * The uploaded image link or URL
+         */
+        "value": string;
+    }
+    interface SallaFilters {
+        /**
+          * Apply filter action.
+         */
+        "applyFilters": () => Promise<void>;
+        /**
+          * Array of filter options
+         */
+        "filters"?: Filter[];
+        /**
+          * Method to get filter data.
+         */
+        "getFilters": () => Promise<any>;
+        /**
+          * Reset selected filters.
+         */
+        "resetFilters": () => Promise<void>;
+    }
+    interface SallaFiltersWidget {
+        /**
+          * Selected filter options value.
+         */
+        "filtersData": object;
+        /**
+          * Filter option along with possible values.
+         */
+        "option": Filter;
+        /**
+          * Reset selected filter options.
+         */
+        "reset": () => Promise<void>;
+        "setWidgetHeight": (delay?: number) => Promise<void>;
+        /**
+          * Action to show more or less filter options.
+         */
+        "showMore": () => Promise<void>;
+        /**
+          * Action to toggle widget open or closed (expand/ collapse).
+         */
+        "toggleWidget": () => Promise<void>;
+        /**
+          * Show more or less filter options.
+         */
+        "withLoadMore": boolean;
+    }
+    interface SallaGifting {
+        /**
+          * Hide / close the gifting modal window
+         */
+        "close": () => Promise<HTMLElement>;
+        /**
+          * Go to the step 2
+         */
+        "goToStep2": () => Promise<void>;
+        /**
+          * Show / Open the gifting modal window
+         */
+        "open": () => Promise<any>;
+        /**
+          * The product id for which the gifting system is required.
+         */
+        "productId": number;
+        /**
+          * Widget subtitle
+         */
+        "widgetSubtitle": string;
+        /**
+          * Widget title
+         */
+        "widgetTitle": string;
+    }
+    interface SallaInfiniteScroll {
+        /**
+          * Is there is need to autoload next page when scroll `next-page-autoload|next-page.autoload`
+         */
+        "autoload": boolean;
+        /**
+          * Class selector to know the container if it's not the host `<salla-infinite-scroll>`
+         */
+        "container": string;
+        /**
+          * Class selector to know list items
+         */
+        "item": string;
+        /**
+          * Load more text
+         */
+        "loadMoreText": string;
+        /**
+          * Next Page element
+         */
+        "nextPage": string;
+    }
+    interface SallaInstallment {
+        /**
+          * Currency code
+         */
+        "currency": string;
+        /**
+          * Language code
+         */
+        "language": string;
+        /**
+          * Current product price
+         */
+        "price": string;
+    }
+    interface SallaListTile {
+        /**
+          * Designates the component as anchor and applies the `href` attribute.
+         */
+        "href": string | undefined;
+        /**
+          * Designates the target attribute. This should only be applied when using the `href` prop.
+         */
+        "target": "_blank" | "_self" | "_parent" | "_top" | "framename";
+    }
+    interface SallaLoading {
+        /**
+          * Spinner background color.
+         */
+        "bgColor": string;
+        /**
+          * Spinner content color.
+         */
+        "color": string;
+        /**
+          * Sets the diameter of the circle in pixels, Defaults to `32`
+         */
+        "size": number | string;
+        /**
+          * Sets the stroke of the circle (border) in pixels, Defaults to `4`
+         */
+        "width": number | string;
+    }
+    interface SallaLocalizationModal {
+        /**
+          * Hide the component
+         */
+        "close": () => Promise<HTMLElement>;
+        /**
+          * Current currency (existing or newly selected)
+         */
+        "currency": string;
+        /**
+          * Current language (existing or newly selected)
+         */
+        "language": string;
+        /**
+          * open the component
+         */
+        "open": () => Promise<any>;
+        /**
+          * Change currency and language to the selected ones.
+         */
+        "submit": () => Promise<void>;
+    }
+    interface SallaLoginModal {
+        /**
+          * Does the merchant allow to login using email
+         */
+        "isEmailAllowed": boolean;
+        /**
+          * Does the merchant require registration with email & mobile
+         */
+        "isEmailRequired": boolean;
+        /**
+          * Does the merchant/current location for visitor allow to login using mobile, By default outside KSA is `false`
+         */
+        "isMobileAllowed": boolean;
+        /**
+          * Open login component
+         */
+        "open": (event?: any) => Promise<HTMLElement>;
+        /**
+          * Once the api verify success, it will be login the customer in web pages
+         */
+        "supportWebAuth": boolean;
+    }
+    interface SallaLoyalty {
+        /**
+          * Does the merchant allow to login using email
+         */
+        "allowEmail": boolean;
+        /**
+          * Does the merchant/current location for visitor allow to login using mobile, By default outside KSA is `false`
+         */
+        "allowMobile": boolean;
+        /**
+          * Hide loyalty modal
+         */
+        "close": () => Promise<HTMLElement>;
+        /**
+          * Available customer points with which they can exchange.
+         */
+        "customerPoints": number;
+        /**
+          * Exchange loyalty points with the selected prize item
+          * @param loyalty_prize_id
+         */
+        "exchangeLoyaltyPoint": () => Promise<any>;
+        /**
+          * Message to show for guest users.
+         */
+        "guestMessage": string;
+        /**
+          * Show loyalty modal
+         */
+        "open": () => Promise<any>;
+        /**
+          * The exchanged prize point
+         */
+        "prizePoints": string | number;
+        /**
+          * The prize title
+         */
+        "prizeTitle": string;
+        /**
+          * Does the merchant require registration with email & mobile
+         */
+        "requireEmail": boolean;
+        /**
+          * Cancel Exchanged prizes
+         */
+        "resetExchange": () => Promise<any>;
+    }
+    interface SallaLoyaltyPrizeItem {
+        /**
+          * Prize item to be displayed in this component.
+         */
+        "item": Item;
+    }
+    interface SallaMaintenanceAlert {
+    }
+    interface SallaMap {
+        /**
+          * Sets google api key value, default Merchant key
+         */
+        "apiKey": string;
+        /**
+          * Latitude coordinate, defaults to current user location
+         */
+        "lat": number;
+        /**
+          * Longitude coordinate, defaults to current user location
+         */
+        "lng": number;
+        /**
+          * Modal Title
+         */
+        "modalTitle": string;
+        /**
+          * File input name for the native formData
+         */
+        "name": string;
+        /**
+          * Open location component
+         */
+        "open": () => Promise<HTMLElement>;
+        /**
+          * Disable or enable actions
+         */
+        "readonly": boolean;
+        /**
+          * Set if the location input is required or not
+         */
+        "required": boolean;
+        /**
+          * Sets the search bar visibility.
+         */
+        "searchable": boolean;
+        /**
+          * Sets map style.
+         */
+        "theme": string;
+        /**
+          * Sets start map zoom.
+         */
+        "zoom": number;
+    }
+    interface SallaModal {
+        /**
+          * Align modal content to center, defaults to `false`
+         */
+        "centered": boolean;
+        /**
+          * close the modal
+         */
+        "close": () => Promise<HTMLElement>;
+        /**
+          * open the modal on rendering
+         */
+        "hasSkeleton": boolean;
+        /**
+          * Set the style of the header icon.
+         */
+        "iconStyle": 'error' | 'success' | 'primary' | 'normal';
+        /**
+          * Sets the modal to be closable. Defaults to `true`
+         */
+        "isClosable": boolean;
+        /**
+          * Show loading in the middle
+         */
+        "isLoading": boolean;
+        /**
+          * Start loading
+         */
+        "loading": () => Promise<HTMLElement>;
+        /**
+          * Avoid padding in the modal body or not, defaults to `false`
+         */
+        "noPadding": boolean;
+        /**
+          * Open the modal
+         */
+        "open": () => Promise<HTMLElement>;
+        /**
+          * The position of the modal
+         */
+        "position": 'top' | 'middle' | 'bottom';
+        /**
+          * Change the Modal Title
+          * @param modalTitle
+         */
+        "setTitle": (modalTitle: any) => Promise<HTMLElement>;
+        /**
+          * Stop the loading
+         */
+        "stopLoading": () => Promise<HTMLElement>;
+        /**
+          * Set modal sub title.
+         */
+        "subTitle": string;
+        /**
+          * Show subtitle before the title or not, defaults to `false` (after the title)
+         */
+        "subTitleFirst": boolean;
+        /**
+          * open the modal on rendering
+         */
+        "visible": boolean;
+        /**
+          * The size of the modal
+         */
+        "width": 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'full';
+    }
+    interface SallaOfferModal {
+        /**
+          * Show the available offers for the product
+          * @param product_id
+         */
+        "open": (product_id: number) => Promise<any>;
+        /**
+          * Show offer details
+          * @param offer
+         */
+        "showOffer": (offer: any) => Promise<void>;
+    }
+    interface SallaPlaceholder {
+        /**
+          * Defines the alignment of contents. Defaults to [`left`]
+         */
+        "alignment": 'left' | 'center' | 'right';
+        /**
+          * Custom icon to display, defaults to [`Inbox`], can be any valid svg icon or inline element with font icon
+         */
+        "icon": string;
+        /**
+          * The size of the icon. Defaults to [`md`] = 45px for font icon & width/height: 3.5rem for svg icon
+         */
+        "iconSize": 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | 'xxxl';
+    }
+    interface SallaPriceRange {
+        /**
+          * Currently selected price filter data
+         */
+        "filtersData": any;
+        /**
+          * Maximum price threshold value
+         */
+        "maxPrice": any;
+        /**
+          * Minimum price threshold value
+         */
+        "minPrice": any;
+        /**
+          * Product price range filter option object instance
+         */
+        "option": Filter;
+        /**
+          * reset the price range inputs
+         */
+        "reset": () => Promise<void>;
+    }
+    interface SallaProductAvailability {
+        /**
+          * Notification channels
+         */
+        "channels": 'sms' | 'email' | 'sms,email';
+        /**
+          * is current user already subscribed
+         */
+        "isSubscribed": boolean;
+        /**
+          * Listen to product options availability.
+         */
+        "notifyOptionsAvailability": boolean;
+        /**
+          * product id that can visitor subscribe to its availability notification
+         */
+        "productId": number;
+    }
+    interface SallaProductCard {
+        /**
+          * Full image card.
+         */
+        "fullImage": boolean;
+        /**
+          * Hide add to cart button.
+         */
+        "hideAddBtn": boolean;
+        /**
+          * Horizontal card.
+         */
+        "horizontal": boolean;
+        /**
+          * Special card.
+         */
+        "isSpecial": boolean;
+        /**
+          * Minimal card.
+         */
+        "minimal": boolean;
+        /**
+          * Product information.
+         */
+        "product": string;
+        /**
+          * Support shadow on hover.
+         */
+        "shadowOnHover": boolean;
+        /**
+          * Show quantity.
+         */
+        "showQuantity": boolean;
+    }
+    interface SallaProductOptions {
+        /**
+          * Get a specific option by its id.
+         */
+        "getOption": (option_id: any) => Promise<Option>;
+        /**
+          * Get selected options.
+         */
+        "getSelectedOptions": () => Promise<any[]>;
+        /**
+          * Get the id's of the selected options.
+         */
+        "getSelectedOptionsData": () => Promise<{}>;
+        /**
+          * Return true if there is any out of stock options are selected and vise versa.
+         */
+        "hasOutOfStockOption": () => Promise<boolean>;
+        /**
+          * Product detail information.
+         */
+        "options": string;
+        /**
+          * The id of the product to which the options are going to be fetched for.
+         */
+        "productId": number;
+        /**
+          * Report options form validity.
+         */
+        "reportValidity": () => Promise<boolean>;
+    }
+    interface SallaProductSizeGuide {
+        /**
+          * Hide the size-guide modal window
+         */
+        "close": () => Promise<HTMLElement>;
+        /**
+          * Show the size-guide modal window
+         */
+        "open": (product_id: number) => Promise<any>;
+    }
+    interface SallaProductsList {
+        /**
+          * should listen to filters events `salla-filters::changed` and re-render
+         */
+        "filtersResults": boolean;
+        /**
+          * Horizontal cards
+         */
+        "horizontalCards": boolean;
+        /**
+          * Limit for number of products in the list.
+         */
+        "limit": number;
+        /**
+          * Reload the list of products (entire content of the component).
+         */
+        "reload": () => Promise<void>;
+        /**
+          * Set parsed filters data from URI
+          * @param filters
+         */
+        "setFilters": (filters: any) => Promise<void>;
+        /**
+          * Sorting the list of products
+         */
+        "sortBy"?: string | 'ourSuggest' | 'bestSell' | 'topRated' | 'priceFromTopToLow' | 'priceFromLowToTop';
+        /**
+          * The source of the products list
+          * @type {string}
+         */
+        "source": 'categories' | 'latest' | 'related' | 'brands' | 'json' | 'search' | 'tags' | 'selected' | 'offers' | 'landing-page' | 'sales';
+        /**
+          * The source value, cloud be different values as following: - array of ids when `source` in ['categories', 'brands', 'tags', 'selected'] - keyword when `source` = 'search' - products payload when `source` = 'json' - product_id when `source` = 'related'
+          * @type {string}
+         */
+        "sourceValue": any;
+    }
+    interface SallaProductsSlider {
+        /**
+          * autoplay option for products slider
+         */
+        "autoplay": boolean;
+        /**
+          * Title of the block - works only if slider is true
+          * @type {string}
+          * @default ''
+         */
+        "blockTitle": string;
+        /**
+          * Display 'ALL' URL
+          * @type {string}
+          * @default ''
+         */
+        "displayAllUrl": string;
+        /**
+          * Limit for number of products in the list.
+         */
+        "limit": number;
+        /**
+          * Slider Id, if not provided will be generated automatically
+          * @type {string}
+          * @default ''
+         */
+        "sliderId": string;
+        /**
+          * Source of the products, if api will get the products from the API, if json will get the products from the products prop
+          * @type {string}
+          * @default ''
+         */
+        "source": 'categories' | 'latest' | 'related' | 'brands' | 'json' | 'tags' | 'selected' | 'offers' | 'landing-page';
+        /**
+          * The source value, cloud be different values as following: - array of ids when `source` in ['categories', 'brands', 'tags', 'selected'] - products payload when `source` = 'json' - product_id when `source` = 'related'
+          * @type {string}
+         */
+        "sourceValue": string;
+        /**
+          * Sub title of the block - works only if slider is true
+          * @type {string}
+          * @default ''
+         */
+        "subTitle": string;
+    }
+    interface SallaProgressBar {
+        /**
+          * Progress bar color, defaults to: `salla.config.get('theme.color.primary', "#ffd5c4")`
+         */
+        "color": string;
+        /**
+          * You can just pass the donation as json string ex: `{"target_message":null,"target_date":"2023-04-18","target_end_date":"2023-04-18","target_amount":400,"collected_amount":380,"can_donate":true}`
+         */
+        "donation": string | Donation;
+        /**
+          * Big Title, before the progress bar.
+         */
+        "header": string;
+        /**
+          * Set height for the wrapper.
+         */
+        "height": string;
+        /**
+          * Subtitle under the progress bar or instead of it if the target not being set.
+         */
+        "message": string;
+        /**
+          * Stripped effect for tje progress bar.
+         */
+        "stripped": boolean;
+        /**
+          * The goal of the progress bar
+         */
+        "target": number;
+        /**
+          * The unite to be added after the numbers, defaults to: `salla.config.currency().symbol`
+         */
+        "unit": string;
+        /**
+          * The progress so far as of the goal.
+         */
+        "value": number;
+    }
+    interface SallaQuantityInput {
+        /**
+          * Cart Item Id
+         */
+        "cartItemId": any;
+        /**
+          * decrease quantity by one.
+          * @return HTMLSallaQuantityInputElement
+         */
+        "decrease": () => Promise<HTMLElement>;
+        /**
+          * increase quantity by one.
+          * @return HTMLSallaQuantityInputElement
+         */
+        "increase": () => Promise<HTMLElement>;
+        /**
+          * set quantity by one.
+          * @return HTMLSallaQuantityInputElement
+         */
+        "setValue": (value: any, fireChangeEvent?: boolean) => Promise<HTMLElement>;
+    }
+    interface SallaQuickBuy {
+        /**
+          * Product amount in base currency (SAR).
+          * @type {number}
+          * @default 0
+         */
+        "amount": number;
+        /**
+          * base currency
+          * @type {string}
+          * @default SAR
+         */
+        "currency": string;
+        /**
+          * To be passed to purchaseNow request
+          * @type {boolean}
+         */
+        "isRequireShipping": boolean;
+        /**
+          * Product options, if is empty will get the data from the document.querySelector('salla-product-options[product-id="X"]')
+          * @type {object}
+          * @default {}
+         */
+        "options": {};
+        /**
+          * Product ID.
+          * @type {string}
+         */
+        "productId": string;
+        /**
+          * Button type.
+          * @type {string}
+          * @default buy
+         */
+        "type": 'plain' | 'buy' | 'donate' | 'book' | 'pay' | 'order';
+    }
+    interface SallaQuickOrder {
+        /**
+          * agreement text from server or from props
+         */
+        "agreementText": string;
+        /**
+          * quick order confirm pay button text
+         */
+        "confirmPayButtonTitle": string;
+        /**
+          * is email required
+         */
+        "isEmailRequired": boolean;
+        /**
+          * quick order pay button text
+         */
+        "payButtonTitle": string;
+        /**
+          * product id local or from page
+         */
+        "productId": string;
+        /**
+          * Quick Order Style
+         */
+        "quickOrderStyle": 'gray' | 'white' | 'default';
+        /**
+          * quick order title
+         */
+        "quickOrderTitle": string;
+        /**
+          * quick order sub title
+         */
+        "subTitle": string;
+        /**
+          * product id local or from page
+         */
+        "thanksMessage": string;
+    }
+    interface SallaRatingModal {
+        /**
+          * Show the rating modal
+         */
+        "close": () => Promise<HTMLElement>;
+        /**
+          * Show the rating modal
+         */
+        "open": () => Promise<void | NodeJS.Timeout>;
+        /**
+          * The order id, to rate on its products & shipping
+         */
+        "orderId": number;
+    }
+    interface SallaRatingStars {
+        /**
+          * Sets input name.
+         */
+        "name": string;
+        /**
+          * Number of reviews to display.
+         */
+        "reviews": number;
+        /**
+          * Sets the height and width of the component. Defaults to medium.
+         */
+        "size": "large" | "medium" | "small" | "mini";
+        /**
+          * The rating value.
+         */
+        "value": number;
+    }
+    interface SallaScopes {
+        /**
+          * Closes the scope modal.
+         */
+        "close": () => Promise<HTMLElement>;
+        /**
+          * Submit form to change exsiting scope.
+         */
+        "handleSubmit": () => Promise<any>;
+        /**
+          * Opens the scope modal.
+         */
+        "open": (mode?: any, product_id?: number) => Promise<any>;
+        /**
+          * Dictates when to show the search field
+         */
+        "searchDisplayLimit": number;
+        /**
+          * Optionally open the modal or enforce the pop-up to the viewer
+         */
+        "selection": 'optional' | 'mandatory';
+    }
+    interface SallaSearch {
+        /**
+          * Sets the height of the input
+         */
+        "height": number;
+        /**
+          * Set the component display without modal window. Defaults to `false`
+         */
+        "inline": boolean;
+        /**
+          * Adds a border radius to the input. Half of the height.
+         */
+        "oval": boolean;
+    }
+    interface SallaSkeleton {
+        /**
+          * Set the skeleton height
+         */
+        "height": string;
+        /**
+          * Set the shape type of the skeleton is it circle or normal
+         */
+        "type": 'circle' | 'normal';
+        /**
+          * Set the skeleton width
+         */
+        "width": string;
+    }
+    interface SallaSlider {
+        /**
+          * Show/hide display all button beside arrows
+         */
+        "arrowsCentered": boolean;
+        /**
+          * Auto Height slider
+         */
+        "autoHeight": boolean;
+        /**
+          * Enable autoplay  - working with `type="carousel" only`
+         */
+        "autoPlay": boolean;
+        /**
+          * Show/hide slider block sub title
+         */
+        "blockSubtitle": string;
+        /**
+          * Show/hide slider block title
+         */
+        "blockTitle": string;
+        /**
+          * Enable center mode  - working with `type="carousel" only`
+         */
+        "centered": boolean;
+        /**
+          * Show/hide arrows
+         */
+        "controlsOuter": boolean;
+        /**
+          * Slider direction. Default: document.documentElement.dir
+         */
+        "direction": string;
+        /**
+          * Show/hide display all button beside arrows
+         */
+        "displayAllUrl": string;
+        /**
+          * Get slider slides *
+         */
+        "getSlides": () => Promise<any>;
+        /**
+          * Disable thumbs slider and show it as a grid
+         */
+        "gridThumbs": boolean;
+        /**
+          * Enable call a specific slide by index from thumbnails option in `salla-slider-options` component, works only if `data-img-id` and `data-slid-index` attributes are set on each slide
+         */
+        "listenToThumbnailsOption": boolean;
+        /**
+          * Run slider in loop, Don't use it for slides with custom components inside it, because it may cause re-render issue
+         */
+        "loop": boolean;
+        /**
+          * Enable pagination
+         */
+        "pagination": boolean;
+        /**
+          * Show/hide arrows
+         */
+        "showControls": boolean;
+        /**
+          * Show/hide thumbs slider arrows
+         */
+        "showThumbsControls": boolean;
+        /**
+          * Run transition to the next slide.
+          * @param speed - Transition duration (in ms).
+          * @param runCallbacks - Set it to false (by default it is true) and transition will not produce transition events. *
+         */
+        "slideNext": (speed?: number, runCallbacks?: boolean) => Promise<void>;
+        /**
+          * Does the same as .slideNext but for the case when used with enabled loop. So this method will slide to next slide with realIndex matching to next index
+          * @param speed - Transition duration (in ms).
+          * @param runCallbacks - Set it to false (by default it is true) and transition will not produce transition events. *
+         */
+        "slideNextLoop": (speed?: number, runCallbacks?: boolean) => Promise<void>;
+        /**
+          * Run transition to the previous slide.
+          * @param speed - Transition duration (in ms).
+          * @param runCallbacks - Set it to false (by default it is true) and transition will not produce transition events. *
+         */
+        "slidePrev": (speed?: number, runCallbacks?: boolean) => Promise<void>;
+        /**
+          * Does the same as .slidePrev but for the case when used with enabled loop. So this method will slide to previous slide with realIndex matching to previous index
+          * @param speed - Transition duration (in ms).
+          * @param runCallbacks - Set it to false (by default it is true) and transition will not produce transition events. *
+         */
+        "slidePrevLoop": (speed?: number, runCallbacks?: boolean) => Promise<void>;
+        /**
+          * Reset slider position to currently active slide for the duration equal to 'speed' parameter.
+          * @param speed - Transition duration (in ms).
+          * @param runCallbacks - Set it to false (by default it is true) and transition will not produce transition events. *
+         */
+        "slideReset": (speed?: number, runCallbacks?: boolean) => Promise<void>;
+        /**
+          * Run transition to the slide with index number equal to 'index' parameter for the duration equal to 'speed' parameter.
+          * @param index - Index number of slide.
+          * @param speed - Transition duration (in ms).
+          * @param runCallbacks - Set it to false (by default it is true) and transition will not produce transition events. *
+         */
+        "slideTo": (index: number, speed?: number, runCallbacks?: boolean) => Promise<any>;
+        /**
+          * Reset slider position to closest slide/snap point for the duration equal to 'speed' parameter.
+          * @param speed - Transition duration (in ms).
+          * @param runCallbacks - Set it to false (by default it is true) and transition will not produce transition events. *
+         */
+        "slideToClosest": (speed?: number, runCallbacks?: boolean) => Promise<void>;
+        /**
+          * Does the same as .slideTo but for the case when used with enabled loop. So this method will slide to slides with realIndex matching to passed index
+          * @param speed - Transition duration (in ms).
+          * @param runCallbacks - Set it to false (by default it is true) and transition will not produce transition events. *
+         */
+        "slideToLoop": (index: number, speed?: number, runCallbacks?: boolean) => Promise<void>;
+        /**
+          * Slider Configs refer to https://swiperjs.com/swiper-api#parameters and pass the entire config object
+          * @example let slider = document.querySelector('salla-slider');  slider.sliderConfig = {  slidesPerView: 1,  spaceBetween : 30,  lazy: true, }
+         */
+        "sliderConfig": any;
+        /**
+          * slidesPerView
+         */
+        "slidesPerView": string;
+        /**
+          * Thumbs Slider Configs refer to https://swiperjs.com/swiper-api#parameters and pass the entire config object
+          * @example let slider = document.querySelector('salla-slider');  slider.thumbsConfig = {  slidesPerView: 1,  spaceBetween : 30,  lazy: true, }
+         */
+        "thumbsConfig": any;
+        /**
+          * Set the type of the slider Default: ''
+         */
+        "type": 'carousel' | 'fullscreen' | 'thumbs' | 'default' | 'hero' | 'testimonials' | 'blog' | 'fullwidth' | '';
+        /**
+          * You should call it after you add/remove slides manually, or after you hide/show it, or do any custom DOM modifications with Swiper This method also includes subcall of the following methods which you can use separately: *
+         */
+        "update": () => Promise<void>;
+        /**
+          * Force slider to update its height (when autoHeight enabled) for the duration equal to 'speed' parameter
+          * @param speed - Transition duration (in ms). *
+         */
+        "updateAutoHeight": (speed?: number) => Promise<void>;
+        /**
+          * recalculate slider progress *
+         */
+        "updateProgress": () => Promise<void>;
+        /**
+          * recalculate number of slides and their offsets. Useful after you add/remove slides with JavaScript *
+         */
+        "updateSlides": () => Promise<void>;
+        /**
+          * update active/prev/next classes on slides and bullets *
+         */
+        "updateSlidesClasses": () => Promise<void>;
+        /**
+          * Vertical or Horizontal main slider
+         */
+        "vertical": boolean;
+        /**
+          * Vertical or Horizontal thumbs slider
+         */
+        "verticalThumbs": boolean;
+    }
+    interface SallaSocialShare {
+        /**
+          * Activate or open the share menu.
+         */
+        "open": () => Promise<void>;
+        /**
+          * selected platforms to share | all platforms
+         */
+        "platforms": string;
+        "refresh": () => Promise<void>;
+        /**
+          * page url that will be shared custom | current page url
+         */
+        "url": string;
+        /**
+          * page url name that will be shared custom | current page url
+         */
+        "urlName": string;
+    }
+    interface SallaTabContent {
+        /**
+          * Expose self for the parent.
+         */
+        "getChild": () => Promise<{ selected: any; unselect: any; name: string; }>;
+        /**
+          * Set name of the tab content. Mainly used as a key to s ynchronize the content with it's respective header.
+         */
+        "name": string;
+    }
+    interface SallaTabHeader {
+        /**
+          * The class applied to the currently active(selected) tab
+         */
+        "activeClass": string;
+        /**
+          * Center tab items in the given flex.
+         */
+        "centered": boolean;
+        /**
+          * Expose self for the parent.
+         */
+        "getChild": () => Promise<{ selected: any; unselect: any; name: string; id: string; }>;
+        /**
+          * Set the height of the tab bar
+         */
+        "height": number | string;
+        /**
+          * Header identifier name to sync with the content.
+         */
+        "name": string;
+    }
+    interface SallaTabs {
+        /**
+          * Background color
+         */
+        "backgroundColor": string;
+        /**
+          * Align tabs vertically.
+         */
+        "vertical": boolean;
+    }
+    interface SallaTelInput {
+        /**
+          * Current country_code
+         */
+        "countryCode": string;
+        /**
+          * Get current values
+          * @return
+         */
+        "getValues": () => Promise<{ [x: string]: any; countryCode: string; countryKey: any; }>;
+        /**
+          * Is current data valid or not
+          * @return
+         */
+        "isValid": () => Promise<boolean>;
+        /**
+          * input name
+         */
+        "name": string;
+        /**
+          * Current mobile number
+         */
+        "phone": string;
+    }
+    interface SallaUserMenu {
+        /**
+          * To display the trigger as an avatar only
+         */
+        "avatarOnly": boolean;
+        /**
+          * To display only the list without the dropdown functionality
+         */
+        "inline": boolean;
+        /**
+          * To Make the dropdown menu relative to parent element or not
+         */
+        "relativeDropdown": boolean;
+        /**
+          * To display the dropdown header in mobile sheet
+         */
+        "showHeader": boolean;
+    }
+    interface SallaUserSettings {
+        /**
+          * Value used for handling notification toggle check box.
+         */
+        "isNotifiable": boolean;
+    }
+    interface SallaVerify {
+        /**
+          * should auto reloading the page after success verification
+         */
+        "autoReload": boolean;
+        /**
+          * Should render component without modal
+         */
+        "display": 'inline' | 'modal';
+        /**
+          * Get current code
+          * @return
+         */
+        "getCode": () => Promise<string>;
+        /**
+          * Open verifying modal
+          * @param data
+         */
+        "open": (data: any) => Promise<void>;
+        /**
+          * Once the api verify success, it will be login the customer in web pages
+         */
+        "supportWebAuth": boolean;
+        /**
+          * Verifying method
+         */
+        "type": 'mobile' | 'email';
     }
 }
+export interface SallaAddProductButtonCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSallaAddProductButtonElement;
+}
+export interface SallaColorPickerCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSallaColorPickerElement;
+}
+export interface SallaDatetimePickerCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSallaDatetimePickerElement;
+}
+export interface SallaFileUploadCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSallaFileUploadElement;
+}
+export interface SallaFiltersCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSallaFiltersElement;
+}
+export interface SallaFiltersWidgetCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSallaFiltersWidgetElement;
+}
+export interface SallaLoyaltyPrizeItemCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSallaLoyaltyPrizeItemElement;
+}
+export interface SallaMapCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSallaMapElement;
+}
+export interface SallaModalCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSallaModalElement;
+}
+export interface SallaPriceRangeCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSallaPriceRangeElement;
+}
+export interface SallaProductOptionsCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSallaProductOptionsElement;
+}
+export interface SallaProductsListCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSallaProductsListElement;
+}
+export interface SallaQuickOrderCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSallaQuickOrderElement;
+}
+export interface SallaSliderCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSallaSliderElement;
+}
+export interface SallaTabHeaderCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSallaTabHeaderElement;
+}
+export interface SallaTelInputCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSallaTelInputElement;
+}
+export interface SallaVerifyCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSallaVerifyElement;
+}
 declare global {
-    interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
+    interface HTMLSallaAddProductButtonElement extends Components.SallaAddProductButton, HTMLStencilElement {
     }
-    var HTMLMyComponentElement: {
-        prototype: HTMLMyComponentElement;
-        new (): HTMLMyComponentElement;
+    var HTMLSallaAddProductButtonElement: {
+        prototype: HTMLSallaAddProductButtonElement;
+        new (): HTMLSallaAddProductButtonElement;
+    };
+    interface HTMLSallaBottomAlertElement extends Components.SallaBottomAlert, HTMLStencilElement {
+    }
+    var HTMLSallaBottomAlertElement: {
+        prototype: HTMLSallaBottomAlertElement;
+        new (): HTMLSallaBottomAlertElement;
+    };
+    interface HTMLSallaButtonElement extends Components.SallaButton, HTMLStencilElement {
+    }
+    var HTMLSallaButtonElement: {
+        prototype: HTMLSallaButtonElement;
+        new (): HTMLSallaButtonElement;
+    };
+    interface HTMLSallaCartSummaryElement extends Components.SallaCartSummary, HTMLStencilElement {
+    }
+    var HTMLSallaCartSummaryElement: {
+        prototype: HTMLSallaCartSummaryElement;
+        new (): HTMLSallaCartSummaryElement;
+    };
+    interface HTMLSallaColorPickerElement extends Components.SallaColorPicker, HTMLStencilElement {
+    }
+    var HTMLSallaColorPickerElement: {
+        prototype: HTMLSallaColorPickerElement;
+        new (): HTMLSallaColorPickerElement;
+    };
+    interface HTMLSallaCommentFormElement extends Components.SallaCommentForm, HTMLStencilElement {
+    }
+    var HTMLSallaCommentFormElement: {
+        prototype: HTMLSallaCommentFormElement;
+        new (): HTMLSallaCommentFormElement;
+    };
+    /**
+     * its to easy to use, currenlty its support select & checkbox input as trigger for show/hide the dom
+     * the dom you can put it like this data-show-when="{name of the field} {= or !=} {value of the field}"
+     */
+    interface HTMLSallaConditionalFieldsElement extends Components.SallaConditionalFields, HTMLStencilElement {
+    }
+    var HTMLSallaConditionalFieldsElement: {
+        prototype: HTMLSallaConditionalFieldsElement;
+        new (): HTMLSallaConditionalFieldsElement;
+    };
+    interface HTMLSallaCountDownElement extends Components.SallaCountDown, HTMLStencilElement {
+    }
+    var HTMLSallaCountDownElement: {
+        prototype: HTMLSallaCountDownElement;
+        new (): HTMLSallaCountDownElement;
+    };
+    interface HTMLSallaDatetimePickerElement extends Components.SallaDatetimePicker, HTMLStencilElement {
+    }
+    var HTMLSallaDatetimePickerElement: {
+        prototype: HTMLSallaDatetimePickerElement;
+        new (): HTMLSallaDatetimePickerElement;
+    };
+    interface HTMLSallaFileUploadElement extends Components.SallaFileUpload, HTMLStencilElement {
+    }
+    var HTMLSallaFileUploadElement: {
+        prototype: HTMLSallaFileUploadElement;
+        new (): HTMLSallaFileUploadElement;
+    };
+    interface HTMLSallaFiltersElement extends Components.SallaFilters, HTMLStencilElement {
+    }
+    var HTMLSallaFiltersElement: {
+        prototype: HTMLSallaFiltersElement;
+        new (): HTMLSallaFiltersElement;
+    };
+    interface HTMLSallaFiltersWidgetElement extends Components.SallaFiltersWidget, HTMLStencilElement {
+    }
+    var HTMLSallaFiltersWidgetElement: {
+        prototype: HTMLSallaFiltersWidgetElement;
+        new (): HTMLSallaFiltersWidgetElement;
+    };
+    interface HTMLSallaGiftingElement extends Components.SallaGifting, HTMLStencilElement {
+    }
+    var HTMLSallaGiftingElement: {
+        prototype: HTMLSallaGiftingElement;
+        new (): HTMLSallaGiftingElement;
+    };
+    interface HTMLSallaInfiniteScrollElement extends Components.SallaInfiniteScroll, HTMLStencilElement {
+    }
+    var HTMLSallaInfiniteScrollElement: {
+        prototype: HTMLSallaInfiniteScrollElement;
+        new (): HTMLSallaInfiniteScrollElement;
+    };
+    interface HTMLSallaInstallmentElement extends Components.SallaInstallment, HTMLStencilElement {
+    }
+    var HTMLSallaInstallmentElement: {
+        prototype: HTMLSallaInstallmentElement;
+        new (): HTMLSallaInstallmentElement;
+    };
+    interface HTMLSallaListTileElement extends Components.SallaListTile, HTMLStencilElement {
+    }
+    var HTMLSallaListTileElement: {
+        prototype: HTMLSallaListTileElement;
+        new (): HTMLSallaListTileElement;
+    };
+    interface HTMLSallaLoadingElement extends Components.SallaLoading, HTMLStencilElement {
+    }
+    var HTMLSallaLoadingElement: {
+        prototype: HTMLSallaLoadingElement;
+        new (): HTMLSallaLoadingElement;
+    };
+    interface HTMLSallaLocalizationModalElement extends Components.SallaLocalizationModal, HTMLStencilElement {
+    }
+    var HTMLSallaLocalizationModalElement: {
+        prototype: HTMLSallaLocalizationModalElement;
+        new (): HTMLSallaLocalizationModalElement;
+    };
+    interface HTMLSallaLoginModalElement extends Components.SallaLoginModal, HTMLStencilElement {
+    }
+    var HTMLSallaLoginModalElement: {
+        prototype: HTMLSallaLoginModalElement;
+        new (): HTMLSallaLoginModalElement;
+    };
+    interface HTMLSallaLoyaltyElement extends Components.SallaLoyalty, HTMLStencilElement {
+    }
+    var HTMLSallaLoyaltyElement: {
+        prototype: HTMLSallaLoyaltyElement;
+        new (): HTMLSallaLoyaltyElement;
+    };
+    interface HTMLSallaLoyaltyPrizeItemElement extends Components.SallaLoyaltyPrizeItem, HTMLStencilElement {
+    }
+    var HTMLSallaLoyaltyPrizeItemElement: {
+        prototype: HTMLSallaLoyaltyPrizeItemElement;
+        new (): HTMLSallaLoyaltyPrizeItemElement;
+    };
+    interface HTMLSallaMaintenanceAlertElement extends Components.SallaMaintenanceAlert, HTMLStencilElement {
+    }
+    var HTMLSallaMaintenanceAlertElement: {
+        prototype: HTMLSallaMaintenanceAlertElement;
+        new (): HTMLSallaMaintenanceAlertElement;
+    };
+    interface HTMLSallaMapElement extends Components.SallaMap, HTMLStencilElement {
+    }
+    var HTMLSallaMapElement: {
+        prototype: HTMLSallaMapElement;
+        new (): HTMLSallaMapElement;
+    };
+    interface HTMLSallaModalElement extends Components.SallaModal, HTMLStencilElement {
+    }
+    var HTMLSallaModalElement: {
+        prototype: HTMLSallaModalElement;
+        new (): HTMLSallaModalElement;
+    };
+    interface HTMLSallaOfferModalElement extends Components.SallaOfferModal, HTMLStencilElement {
+    }
+    var HTMLSallaOfferModalElement: {
+        prototype: HTMLSallaOfferModalElement;
+        new (): HTMLSallaOfferModalElement;
+    };
+    interface HTMLSallaPlaceholderElement extends Components.SallaPlaceholder, HTMLStencilElement {
+    }
+    var HTMLSallaPlaceholderElement: {
+        prototype: HTMLSallaPlaceholderElement;
+        new (): HTMLSallaPlaceholderElement;
+    };
+    interface HTMLSallaPriceRangeElement extends Components.SallaPriceRange, HTMLStencilElement {
+    }
+    var HTMLSallaPriceRangeElement: {
+        prototype: HTMLSallaPriceRangeElement;
+        new (): HTMLSallaPriceRangeElement;
+    };
+    interface HTMLSallaProductAvailabilityElement extends Components.SallaProductAvailability, HTMLStencilElement {
+    }
+    var HTMLSallaProductAvailabilityElement: {
+        prototype: HTMLSallaProductAvailabilityElement;
+        new (): HTMLSallaProductAvailabilityElement;
+    };
+    interface HTMLSallaProductCardElement extends Components.SallaProductCard, HTMLStencilElement {
+    }
+    var HTMLSallaProductCardElement: {
+        prototype: HTMLSallaProductCardElement;
+        new (): HTMLSallaProductCardElement;
+    };
+    interface HTMLSallaProductOptionsElement extends Components.SallaProductOptions, HTMLStencilElement {
+    }
+    var HTMLSallaProductOptionsElement: {
+        prototype: HTMLSallaProductOptionsElement;
+        new (): HTMLSallaProductOptionsElement;
+    };
+    interface HTMLSallaProductSizeGuideElement extends Components.SallaProductSizeGuide, HTMLStencilElement {
+    }
+    var HTMLSallaProductSizeGuideElement: {
+        prototype: HTMLSallaProductSizeGuideElement;
+        new (): HTMLSallaProductSizeGuideElement;
+    };
+    interface HTMLSallaProductsListElement extends Components.SallaProductsList, HTMLStencilElement {
+    }
+    var HTMLSallaProductsListElement: {
+        prototype: HTMLSallaProductsListElement;
+        new (): HTMLSallaProductsListElement;
+    };
+    interface HTMLSallaProductsSliderElement extends Components.SallaProductsSlider, HTMLStencilElement {
+    }
+    var HTMLSallaProductsSliderElement: {
+        prototype: HTMLSallaProductsSliderElement;
+        new (): HTMLSallaProductsSliderElement;
+    };
+    interface HTMLSallaProgressBarElement extends Components.SallaProgressBar, HTMLStencilElement {
+    }
+    var HTMLSallaProgressBarElement: {
+        prototype: HTMLSallaProgressBarElement;
+        new (): HTMLSallaProgressBarElement;
+    };
+    interface HTMLSallaQuantityInputElement extends Components.SallaQuantityInput, HTMLStencilElement {
+    }
+    var HTMLSallaQuantityInputElement: {
+        prototype: HTMLSallaQuantityInputElement;
+        new (): HTMLSallaQuantityInputElement;
+    };
+    interface HTMLSallaQuickBuyElement extends Components.SallaQuickBuy, HTMLStencilElement {
+    }
+    var HTMLSallaQuickBuyElement: {
+        prototype: HTMLSallaQuickBuyElement;
+        new (): HTMLSallaQuickBuyElement;
+    };
+    interface HTMLSallaQuickOrderElement extends Components.SallaQuickOrder, HTMLStencilElement {
+    }
+    var HTMLSallaQuickOrderElement: {
+        prototype: HTMLSallaQuickOrderElement;
+        new (): HTMLSallaQuickOrderElement;
+    };
+    interface HTMLSallaRatingModalElement extends Components.SallaRatingModal, HTMLStencilElement {
+    }
+    var HTMLSallaRatingModalElement: {
+        prototype: HTMLSallaRatingModalElement;
+        new (): HTMLSallaRatingModalElement;
+    };
+    interface HTMLSallaRatingStarsElement extends Components.SallaRatingStars, HTMLStencilElement {
+    }
+    var HTMLSallaRatingStarsElement: {
+        prototype: HTMLSallaRatingStarsElement;
+        new (): HTMLSallaRatingStarsElement;
+    };
+    interface HTMLSallaScopesElement extends Components.SallaScopes, HTMLStencilElement {
+    }
+    var HTMLSallaScopesElement: {
+        prototype: HTMLSallaScopesElement;
+        new (): HTMLSallaScopesElement;
+    };
+    interface HTMLSallaSearchElement extends Components.SallaSearch, HTMLStencilElement {
+    }
+    var HTMLSallaSearchElement: {
+        prototype: HTMLSallaSearchElement;
+        new (): HTMLSallaSearchElement;
+    };
+    interface HTMLSallaSkeletonElement extends Components.SallaSkeleton, HTMLStencilElement {
+    }
+    var HTMLSallaSkeletonElement: {
+        prototype: HTMLSallaSkeletonElement;
+        new (): HTMLSallaSkeletonElement;
+    };
+    interface HTMLSallaSliderElement extends Components.SallaSlider, HTMLStencilElement {
+    }
+    var HTMLSallaSliderElement: {
+        prototype: HTMLSallaSliderElement;
+        new (): HTMLSallaSliderElement;
+    };
+    interface HTMLSallaSocialShareElement extends Components.SallaSocialShare, HTMLStencilElement {
+    }
+    var HTMLSallaSocialShareElement: {
+        prototype: HTMLSallaSocialShareElement;
+        new (): HTMLSallaSocialShareElement;
+    };
+    interface HTMLSallaTabContentElement extends Components.SallaTabContent, HTMLStencilElement {
+    }
+    var HTMLSallaTabContentElement: {
+        prototype: HTMLSallaTabContentElement;
+        new (): HTMLSallaTabContentElement;
+    };
+    interface HTMLSallaTabHeaderElement extends Components.SallaTabHeader, HTMLStencilElement {
+    }
+    var HTMLSallaTabHeaderElement: {
+        prototype: HTMLSallaTabHeaderElement;
+        new (): HTMLSallaTabHeaderElement;
+    };
+    interface HTMLSallaTabsElement extends Components.SallaTabs, HTMLStencilElement {
+    }
+    var HTMLSallaTabsElement: {
+        prototype: HTMLSallaTabsElement;
+        new (): HTMLSallaTabsElement;
+    };
+    interface HTMLSallaTelInputElement extends Components.SallaTelInput, HTMLStencilElement {
+    }
+    var HTMLSallaTelInputElement: {
+        prototype: HTMLSallaTelInputElement;
+        new (): HTMLSallaTelInputElement;
+    };
+    interface HTMLSallaUserMenuElement extends Components.SallaUserMenu, HTMLStencilElement {
+    }
+    var HTMLSallaUserMenuElement: {
+        prototype: HTMLSallaUserMenuElement;
+        new (): HTMLSallaUserMenuElement;
+    };
+    interface HTMLSallaUserSettingsElement extends Components.SallaUserSettings, HTMLStencilElement {
+    }
+    var HTMLSallaUserSettingsElement: {
+        prototype: HTMLSallaUserSettingsElement;
+        new (): HTMLSallaUserSettingsElement;
+    };
+    interface HTMLSallaVerifyElement extends Components.SallaVerify, HTMLStencilElement {
+    }
+    var HTMLSallaVerifyElement: {
+        prototype: HTMLSallaVerifyElement;
+        new (): HTMLSallaVerifyElement;
     };
     interface HTMLElementTagNameMap {
-        "my-component": HTMLMyComponentElement;
+        "salla-add-product-button": HTMLSallaAddProductButtonElement;
+        "salla-bottom-alert": HTMLSallaBottomAlertElement;
+        "salla-button": HTMLSallaButtonElement;
+        "salla-cart-summary": HTMLSallaCartSummaryElement;
+        "salla-color-picker": HTMLSallaColorPickerElement;
+        "salla-comment-form": HTMLSallaCommentFormElement;
+        "salla-conditional-fields": HTMLSallaConditionalFieldsElement;
+        "salla-count-down": HTMLSallaCountDownElement;
+        "salla-datetime-picker": HTMLSallaDatetimePickerElement;
+        "salla-file-upload": HTMLSallaFileUploadElement;
+        "salla-filters": HTMLSallaFiltersElement;
+        "salla-filters-widget": HTMLSallaFiltersWidgetElement;
+        "salla-gifting": HTMLSallaGiftingElement;
+        "salla-infinite-scroll": HTMLSallaInfiniteScrollElement;
+        "salla-installment": HTMLSallaInstallmentElement;
+        "salla-list-tile": HTMLSallaListTileElement;
+        "salla-loading": HTMLSallaLoadingElement;
+        "salla-localization-modal": HTMLSallaLocalizationModalElement;
+        "salla-login-modal": HTMLSallaLoginModalElement;
+        "salla-loyalty": HTMLSallaLoyaltyElement;
+        "salla-loyalty-prize-item": HTMLSallaLoyaltyPrizeItemElement;
+        "salla-maintenance-alert": HTMLSallaMaintenanceAlertElement;
+        "salla-map": HTMLSallaMapElement;
+        "salla-modal": HTMLSallaModalElement;
+        "salla-offer-modal": HTMLSallaOfferModalElement;
+        "salla-placeholder": HTMLSallaPlaceholderElement;
+        "salla-price-range": HTMLSallaPriceRangeElement;
+        "salla-product-availability": HTMLSallaProductAvailabilityElement;
+        "salla-product-card": HTMLSallaProductCardElement;
+        "salla-product-options": HTMLSallaProductOptionsElement;
+        "salla-product-size-guide": HTMLSallaProductSizeGuideElement;
+        "salla-products-list": HTMLSallaProductsListElement;
+        "salla-products-slider": HTMLSallaProductsSliderElement;
+        "salla-progress-bar": HTMLSallaProgressBarElement;
+        "salla-quantity-input": HTMLSallaQuantityInputElement;
+        "salla-quick-buy": HTMLSallaQuickBuyElement;
+        "salla-quick-order": HTMLSallaQuickOrderElement;
+        "salla-rating-modal": HTMLSallaRatingModalElement;
+        "salla-rating-stars": HTMLSallaRatingStarsElement;
+        "salla-scopes": HTMLSallaScopesElement;
+        "salla-search": HTMLSallaSearchElement;
+        "salla-skeleton": HTMLSallaSkeletonElement;
+        "salla-slider": HTMLSallaSliderElement;
+        "salla-social-share": HTMLSallaSocialShareElement;
+        "salla-tab-content": HTMLSallaTabContentElement;
+        "salla-tab-header": HTMLSallaTabHeaderElement;
+        "salla-tabs": HTMLSallaTabsElement;
+        "salla-tel-input": HTMLSallaTelInputElement;
+        "salla-user-menu": HTMLSallaUserMenuElement;
+        "salla-user-settings": HTMLSallaUserSettingsElement;
+        "salla-verify": HTMLSallaVerifyElement;
     }
 }
 declare namespace LocalJSX {
-    interface MyComponent {
+    interface SallaAddProductButton {
         /**
-          * The first name
+          * Channels.
          */
-        "first"?: string;
+        "channels"?: string;
         /**
-          * The last name
+          * Donating amount.
          */
-        "last"?: string;
+        "donatingAmount"?: number;
         /**
-          * The middle name
+          * Listen to product options availability.
          */
-        "middle"?: string;
+        "notifyOptionsAvailability"?: boolean;
+        /**
+          * Custome DOM event emitter when product addition to cart fails.
+         */
+        "onFailed"?: (event: SallaAddProductButtonCustomEvent<any>) => void;
+        /**
+          * Custome DOM event emitter when product gets added to cart successfully.
+         */
+        "onSuccess"?: (event: SallaAddProductButtonCustomEvent<any>) => void;
+        /**
+          * Product id
+         */
+        "productId"?: any;
+        /**
+          * Product Status.Defaults to `sale`
+         */
+        "productStatus"?: 'sale' | 'out' | 'out-and-notify';
+        /**
+          * Product type. Defaults to `product`
+         */
+        "productType"?: 'product' | 'service' | 'codes' | 'digital' | 'food' | 'donating' | 'group_products' | 'booking';
+        /**
+          * Product Quantity
+         */
+        "quantity"?: number;
+        /**
+          * Support Quick Pay Button
+         */
+        "quickBuy"?: boolean;
+        /**
+          * Subscribed Options ex: "[[139487,2394739],[1212,1544]]"
+         */
+        "subscribedOptions"?: string;
+        /**
+          * Support themes that have a sticky bar
+         */
+        "supportStickyBar"?: boolean;
+    }
+    interface SallaBottomAlert {
+        /**
+          * Button label - used when type is link and popup
+         */
+        "actionLabel"?: string;
+        /**
+          * Button url - used when type is link
+         */
+        "actionUrl"?: string;
+        /**
+          * Alert Icon class from salla icons library - ex: sicon-user
+         */
+        "icon"?: string;
+        /**
+          * Alert Message
+         */
+        "message"?: string;
+        /**
+          * Alert Type
+         */
+        "type"?: 'link' | 'popup' | 'banner';
+    }
+    interface SallaButton {
+        /**
+          * Button Color
+         */
+        "color"?: 'primary' | 'success' | 'warning' | 'danger' | 'light' | 'gray' | 'dark';
+        /**
+          * Is the button currently disabled
+         */
+        "disabled"?: boolean;
+        /**
+          * Button Fill
+         */
+        "fill"?: 'solid' | 'outline' | 'none';
+        /**
+          * Button with href as normal link
+         */
+        "href"?: string;
+        /**
+          * If there is need to change loader position, pass the position
+         */
+        "loaderPosition"?: 'start' | 'end' | 'center' | 'after';
+        /**
+          * Is the button currently loading
+         */
+        "loading"?: boolean;
+        /**
+          * Button Type
+         */
+        "shape"?: 'link' | 'icon' | 'btn';
+        /**
+          * Button Size
+         */
+        "size"?: 'small' | 'large' | 'medium';
+        /**
+          * Button Width
+         */
+        "width"?: 'wide' | 'normal';
+    }
+    interface SallaCartSummary {
+        /**
+          * Show cart label
+         */
+        "showCartLabel"?: boolean;
+    }
+    interface SallaColorPicker {
+        /**
+          * Initial color for the picker.
+         */
+        "color"?: string;
+        /**
+          * Whether to enable adjusting the alpha channel.
+         */
+        "enableAlpha"?: boolean;
+        /**
+          * How to display the selected color in the text field (the text field still supports input in any format).
+         */
+        "format"?: 'hex' | 'hsl' | 'rgb';
+        /**
+          * File input name for the native formData
+         */
+        "name"?: string;
+        /**
+          * Event whenever the color changes.
+         */
+        "onColorChanged"?: (event: SallaColorPickerCustomEvent<Color>) => void;
+        /**
+          * Event emitted when the input is invalid.
+         */
+        "onInvalidInput"?: (event: SallaColorPickerCustomEvent<any>) => void;
+        /**
+          * Event emitter when the popup closes.
+         */
+        "onPopupClosed"?: (event: SallaColorPickerCustomEvent<Color>) => void;
+        /**
+          * Event emitter when the popup opens.
+         */
+        "onPopupOpened"?: (event: SallaColorPickerCustomEvent<Color>) => void;
+        /**
+          * Event emitter when the user clicks "Ok".
+         */
+        "onSubmitted"?: (event: SallaColorPickerCustomEvent<Color>) => void;
+        /**
+          * Set if the color picker input is required or not
+         */
+        "required"?: boolean;
+        /**
+          * Whether to have a "Cancel" button which closes the popup.
+         */
+        "showCancelButton"?: boolean;
+        /**
+          * Whether to show a text field for color value editing.
+         */
+        "showTextField"?: boolean;
+    }
+    interface SallaCommentForm {
+        /**
+          * The ID of the item(as defined in the type), where the comment is for. defaults to `salla.config.get('page.id')`
+         */
+        "itemId"?: string | number;
+        /**
+          * To show the avatar or not in the comment form
+         */
+        "showAvatar"?: boolean;
+        /**
+          * Type of entity the comment is being submitted for. Defaults to `salla.url.is_page('page-single') ? 'page' : 'product'`
+         */
+        "type"?: 'product' | 'page';
+    }
+    /**
+     * its to easy to use, currenlty its support select & checkbox input as trigger for show/hide the dom
+     * the dom you can put it like this data-show-when="{name of the field} {= or !=} {value of the field}"
+     */
+    interface SallaConditionalFields {
+    }
+    interface SallaCountDown {
+        /**
+          * If true, the count down numbers will be appear in a boxes
+         */
+        "boxed"?: boolean;
+        /**
+          * The color of the count down
+         */
+        "color"?: 'primary' | 'light' | 'dark';
+        /**
+          * The date to count down to Format: MMM DD, YYYY HH:mm:ss (e.g. Jan 2, 2023 16:37:52)
+         */
+        "date"?: string;
+        /**
+          * The digits lang to show in the count down
+         */
+        "digits"?: 'en' | 'auto';
+        /**
+          * If true, the count down will end at the end of the day
+         */
+        "endOfDay"?: boolean;
+        /**
+          * The text to show when the count down ends
+         */
+        "endText"?: string;
+        /**
+          * Show labels for each count down number
+         */
+        "labeled"?: boolean;
+        /**
+          * The size of the count down
+         */
+        "size"?: 'sm' | 'md' | 'lg';
+    }
+    interface SallaDatetimePicker {
+        /**
+          * Allows the user to enter a date directly into the input field. By default, direct entry is disabled.
+         */
+        "allowInput"?: boolean;
+        /**
+          * Allows the preloading of an invalid date. When disabled, the field will be cleared if the provided date is invalid
+         */
+        "allowInvalidPreload"?: boolean;
+        /**
+          * Exactly the same as date format, but for the altInput field.
+         */
+        "altFormat"?: string;
+        /**
+          * Show the user a readable date (as per altFormat), but return something totally different to the server.
+         */
+        "altInput"?: boolean;
+        /**
+          * This class will be added to the input element created by the altInput option. Note that altInput already inherits classes from the original input.
+         */
+        "altInputClass"?: string;
+        /**
+          * Instead of body, appends the calendar to the specified node instead.
+         */
+        "appendTo"?: HTMLElement;
+        /**
+          * Defines how the date will be formatted in the aria-label for calendar days, using the same tokens as dateFormat. If you change this, you should choose a value that will make sense if a screen reader reads it out loud.
+         */
+        "ariaDateFormat"?: string;
+        /**
+          * Whether the default time should be auto-filled when the input is empty and gains or loses focus.
+         */
+        "autoFillDefaultTime"?: boolean;
+        /**
+          * Whether clicking on the input should open the picker. Set it to false if you only want to open the calendar programmatically with [open()]
+         */
+        "clickOpens"?: boolean;
+        /**
+          * Whether calendar should close after date selection or not
+         */
+        "closeOnSelect"?: boolean;
+        /**
+          * When in "multiple" mode, conjunction is used to separate dates in the entry field.
+         */
+        "conjunction"?: string;
+        /**
+          * A string of characters which are used to define how the date will be displayed in the input box. The supported characters are defined in the table below.
+         */
+        "dateFormat"?: string;
+        /**
+          * A custom datestring parser
+         */
+        "dateParser"?: (date: string, format: string) => Date;
+        /**
+          * Sets the initial selected date(s). If you're using mode: "multiple" or a range calendar supply an Array of Date objects or an Array of date strings which follow your dateFormat. Otherwise, you can supply a single Date object or a date string.
+         */
+        "defaultDate"?: DateOption | DateOption[];
+        /**
+          * Initial value of the hour element, when no date is selected
+         */
+        "defaultHour"?: number;
+        /**
+          * Initial value of the minute element, when no date is selected
+         */
+        "defaultMinute"?: number;
+        /**
+          * Initial value of the seconds element, when no date is selected
+         */
+        "defaultSeconds"?: number;
+        /**
+          * Disables certain dates, preventing them from being selected. See https://chmln.github.io/flatpickr/examples/#disabling-specific-dates
+         */
+        "disable"?: DateLimit<DateOption>[];
+        /**
+          * Set this to true to always use the non-native picker on mobile devices. By default, Flatpickr utilizes native datetime widgets unless certain options (e.g. disable) are used.
+         */
+        "disableMobile"?: boolean;
+        /**
+          * Disables all dates except these specified. See https://chmln.github.io/flatpickr/examples/#disabling-all-dates-except-select-few
+         */
+        "enable"?: DateLimit<DateOption>[];
+        /**
+          * Enables seconds selection in the time picker.
+         */
+        "enableSeconds"?: boolean;
+        /**
+          * Enables the time picker
+         */
+        "enableTime"?: boolean;
+        /**
+          * Allows using a custom date formatting function instead of the built-in handling for date formats using dateFormat, altFormat, etc.
+         */
+        "formatDate"?: (date: Date, format: string, locale: Object) => string;
+        /**
+          * Adjusts the step for the hour input (incl. scrolling)
+         */
+        "hourIncrement"?: number;
+        /**
+          * Displays the calendar inline
+         */
+        "inline"?: boolean;
+        /**
+          * The locale, either as a string (e.g. "ar", "en") or as an object. See https://chmln.github.io/flatpickr/localization/
+         */
+        "locale"?: LocaleKey;
+        /**
+          * The maximum date that a user can pick to (inclusive).
+         */
+        "maxDate"?: DateOption;
+        /**
+          * The minimum date that a user can start picking from (inclusive).
+         */
+        "maxTime"?: DateOption;
+        /**
+          * The minimum date that a user can start picking from (inclusive).
+         */
+        "minDate"?: DateOption;
+        /**
+          * The minimum time that a user can start picking from (inclusive).
+         */
+        "minTime"?: DateOption;
+        /**
+          * Adjusts the step for the minute input (incl. scrolling) Defaults to 5
+         */
+        "minuteIncrement"?: number;
+        /**
+          * Date selection mode, defaults to "single"
+         */
+        "mode"?: "single" | "multiple" | "range" | "time";
+        /**
+          * How the month should be displayed in the header of the calendar. If showMonths has a value greater than 1, the month is always shown as static.
+         */
+        "monthSelectorType"?: "dropdown" | "static";
+        /**
+          * the name for the input
+         */
+        "name"?: string;
+        /**
+          * HTML for the arrow icon, used to switch months.
+         */
+        "nextArrow"?: string;
+        /**
+          * Hides the day selection in calendar. Use it along with enableTime to create a time picker.
+         */
+        "noCalendar"?: boolean;
+        /**
+          * Event emitted when the input is invalid.
+         */
+        "onInvalidInput"?: (event: SallaDatetimePickerCustomEvent<any>) => void;
+        /**
+          * Event emitted when the date input gets changed by the user when selecting file(s).
+         */
+        "onPicked"?: (event: SallaDatetimePickerCustomEvent<any>) => void;
+        /**
+          * Placeholder text to show on the input element
+         */
+        "placeholder"?: string;
+        /**
+          * How the calendar should be positioned with regards to the input. Defaults to "auto"
+         */
+        "position"?: "auto" | "above" | "below" | "auto left" | "auto center" | "auto right" | "above left" | "above center" | "above right" | "below left" | "below center" | "below right" | ((self: any, customElement: HTMLElement | undefined) => void);
+        /**
+          * The element off of which the calendar will be positioned. Defaults to the date input
+         */
+        "positionElement"?: HTMLElement;
+        /**
+          * HTML for the left arrow icon, used to switch months.
+         */
+        "prevArrow"?: string;
+        /**
+          * Whether this input i required or not
+         */
+        "required"?: boolean;
+        /**
+          * Whether to display the current month name in shorthand mode, e.g. "Sep" instead "September"
+         */
+        "shorthandCurrentMonth"?: boolean;
+        /**
+          * The number of months to be shown at the same time when displaying the calendar.
+         */
+        "showMonths"?: number;
+        /**
+          * Position the calendar inside the wrapper and next to the input element*.
+         */
+        "static"?: boolean;
+        /**
+          * Displays time picker in 24 hour mode without AM/PM selection when enabled.
+         */
+        "time_24hr"?: boolean;
+        /**
+          * Two way data binding to retrieve the selected date[time] value
+         */
+        "value"?: string;
+        /**
+          * Enables display of week numbers in calendar.
+         */
+        "weekNumbers"?: boolean;
+        /**
+          * See https://chmln.github.io/flatpickr/examples/#flatpickr-external-elements
+         */
+        "wrap"?: boolean;
+    }
+    interface SallaFileUpload {
+        /**
+          * Accepted file types
+         */
+        "accept"?: string;
+        /**
+          * Enable or disable file browser
+         */
+        "allowBrowse"?: boolean;
+        /**
+          * Enable or disable drag n' drop
+         */
+        "allowDrop"?: boolean;
+        /**
+          * Enable or disable adding multiple files
+         */
+        "allowMultiple"?: boolean;
+        /**
+          * Enable or disable pasting of files. Pasting files is not supported on all browesrs.
+         */
+        "allowPaste"?: boolean;
+        /**
+          * Enable or disable the process button
+         */
+        "allowProcess"?: boolean;
+        /**
+          * When set to false the remove button is hidden and disabled
+         */
+        "allowRemove"?: boolean;
+        /**
+          * Allow users to reorder files with drag and drop interaction. Note that this only works in single column mode. It also only works on browsers that support pointer events.
+         */
+        "allowReorder"?: boolean;
+        /**
+          * Allow drop to replace a file, only works when allowMultiple is false
+         */
+        "allowReplace"?: boolean;
+        /**
+          * Enable or disable the revert processing button
+         */
+        "allowRevert"?: boolean;
+        /**
+          * to prepare the upload url automatically pass this prop, ex to upload attach file in cart Item.
+         */
+        "cartItemId"?: string;
+        /**
+          * Set to true to enable custom validity messages. FilePond will throw an error when a parent form is submitted and it contains invalid files.
+         */
+        "checkValidity"?: boolean;
+        /**
+          * Force chunks even for files smaller than the set chunkSize
+         */
+        "chunkForce"?: boolean;
+        /**
+          * Amount of times, and delayes, between retried uploading of a chunk
+         */
+        "chunkRetryDelays"?: Array<number>;
+        /**
+          * The size of a chunk in bytes
+         */
+        "chunkSize"?: number;
+        /**
+          * Enable chunked uploads, when enabled will automatically cut up files in chunkSize chunks before upload.
+         */
+        "chunkUploads"?: boolean;
+        /**
+          * Show credits at the bottom of the upload element. Structure is like [{label,url}]
+         */
+        "credits"?: false;
+        /**
+          * Sets the disabled attribute to the output field
+         */
+        "disabled"?: boolean;
+        /**
+          * Require drop on the FilePond element itself to catch the file.
+         */
+        "dropOnElement"?: boolean;
+        /**
+          * FilePond will catch all files dropped on the webpage
+         */
+        "dropOnPage"?: boolean;
+        /**
+          * When enabled, files are validated before they are dropped. A file is not added when it's invalid.
+         */
+        "dropValidation"?: boolean;
+        /**
+          * If current file has id, pass it here, to be passed back in the `removed` event
+         */
+        "fileId"?: number;
+        /**
+          * The uploaded files as json `[{url:"...", id:123}]` for delete possibility
+         */
+        "files"?: string;
+        /**
+          * Set to true to require the file to be successfully reverted before continuing.
+         */
+        "forceRevert"?: boolean;
+        /**
+          * json formData to be injected in the submit request
+         */
+        "formData"?: string;
+        /**
+          * The original height of the uploader, will be used to reset the height after the image is removed.
+         */
+        "height"?: string;
+        /**
+          * The icon used for process actions
+         */
+        "iconProcess"?: string;
+        /**
+          * The icon used for remove actions
+         */
+        "iconRemove"?: string;
+        /**
+          * The icon used for retry actions
+         */
+        "iconRetry"?: string;
+        /**
+          * The icon used for undo actions
+         */
+        "iconUndo"?: string;
+        /**
+          * Ignored file names when handling dropped directories. Dropping directories is not supported on all browsers.
+         */
+        "ignoredFiles"?: Array<any>;
+        /**
+          * Immediately upload new files to the server
+         */
+        "instantUpload"?: boolean;
+        /**
+          * The interval to use before showing each item being added to the list
+         */
+        "itemInsertInterval"?: number;
+        /**
+          * Set to 'after' to add files to end of list (when dropped at the top of the list or added using browse or paste), set to 'before' to add files at start of list. Set to a compare function to automatically sort items when added
+         */
+        "itemInsertLocation"?: 'before' | 'after' | ((a: FilePondFile, b: FilePondFile) => number);
+        /**
+          * The decimal separator used to render numbers. By default this is determined automatically.
+         */
+        "labelDecimalSeparator"?: string;
+        /**
+          * Default label shown to indicate this is a drop area. FilePond will automatically bind browse file events to the element with CSS class .filepond--label-action
+          * @default `${salla.lang.get('common.uploader.drag_and_drop')}<span class="filepond--label-action"> ${salla.lang.get('common.uploader.browse')} </span>`
+         */
+        "labelIdle"?: string;
+        /**
+          * The thousdands separator used to render numbers. By default this is determined automatically.
+         */
+        "labelThousandsSeparator"?: string;
+        /**
+          * The maximum size of a file, for instance 2MB or 750KB
+         */
+        "maxFileSize"?: `${number}MB` | `${number}KB}`;
+        /**
+          * The maximum number of files that the pond can handle
+         */
+        "maxFilesCount"?: number;
+        /**
+          * The maxmimum number of files that can be uploaded in parallel
+         */
+        "maxParallelUploads"?: number;
+        /**
+          * The submit request method.
+         */
+        "method"?: string;
+        /**
+          * File input name for the native formData
+         */
+        "name"?: string;
+        /**
+          * Event emitted when the file has been added
+         */
+        "onAdded"?: (event: SallaFileUploadCustomEvent<{ error: FilePondErrorDescription | null, file: FilePondFile }>) => void;
+        /**
+          * Event emitted when the input is invalid
+         */
+        "onInvalidInput"?: (event: SallaFileUploadCustomEvent<any>) => void;
+        /**
+          * Event emitted when the file is about to be removed. Returns boolean value.
+         */
+        "onRemoved"?: (event: SallaFileUploadCustomEvent<FilePondFile>) => void;
+        /**
+          * Event emitted when the file has been uploaded and link to the file has been recieved from the server. Returns string value.
+         */
+        "onUploaded"?: (event: SallaFileUploadCustomEvent<string>) => void;
+        /**
+          * File input name in the request payload
+         */
+        "payloadName"?: string;
+        /**
+          * Set the component to be profile image uploader with a preview and a circular shape
+         */
+        "profileImage"?: boolean;
+        /**
+          * Sets the required attribute to the output field
+         */
+        "required"?: boolean;
+        /**
+          * Tells FilePond to store files in hidden file input elements so they can be posted along with normal form post. This only works if the browser supports the DataTransfer constructor (https://caniuse.com/mdn-api_datatransfer_datatransfer), this is the case on Firefox, Chrome, Chromium powered browsers and Safari version 14.1 and higher.
+         */
+        "storeAsFile"?: boolean;
+        /**
+          * The url to submit the image into.
+         */
+        "url"?: string;
+        /**
+          * The uploaded image link or URL
+         */
+        "value"?: string;
+    }
+    interface SallaFilters {
+        /**
+          * Array of filter options
+         */
+        "filters"?: Filter[];
+        /**
+          * Custom event fired when the selected filters are changed.
+         */
+        "onChanged"?: (event: SallaFiltersCustomEvent<any>) => void;
+    }
+    interface SallaFiltersWidget {
+        /**
+          * Selected filter options value.
+         */
+        "filtersData"?: object;
+        /**
+          * Custom event emitted up on filter option selection changes.
+         */
+        "onChanged"?: (event: SallaFiltersWidgetCustomEvent<any>) => void;
+        /**
+          * Filter option along with possible values.
+         */
+        "option"?: Filter;
+        /**
+          * Show more or less filter options.
+         */
+        "withLoadMore"?: boolean;
+    }
+    interface SallaGifting {
+        /**
+          * The product id for which the gifting system is required.
+         */
+        "productId"?: number;
+        /**
+          * Widget subtitle
+         */
+        "widgetSubtitle"?: string;
+        /**
+          * Widget title
+         */
+        "widgetTitle"?: string;
+    }
+    interface SallaInfiniteScroll {
+        /**
+          * Is there is need to autoload next page when scroll `next-page-autoload|next-page.autoload`
+         */
+        "autoload"?: boolean;
+        /**
+          * Class selector to know the container if it's not the host `<salla-infinite-scroll>`
+         */
+        "container"?: string;
+        /**
+          * Class selector to know list items
+         */
+        "item"?: string;
+        /**
+          * Load more text
+         */
+        "loadMoreText"?: string;
+        /**
+          * Next Page element
+         */
+        "nextPage"?: string;
+    }
+    interface SallaInstallment {
+        /**
+          * Currency code
+         */
+        "currency"?: string;
+        /**
+          * Language code
+         */
+        "language"?: string;
+        /**
+          * Current product price
+         */
+        "price"?: string;
+    }
+    interface SallaListTile {
+        /**
+          * Designates the component as anchor and applies the `href` attribute.
+         */
+        "href"?: string | undefined;
+        /**
+          * Designates the target attribute. This should only be applied when using the `href` prop.
+         */
+        "target"?: "_blank" | "_self" | "_parent" | "_top" | "framename";
+    }
+    interface SallaLoading {
+        /**
+          * Spinner background color.
+         */
+        "bgColor"?: string;
+        /**
+          * Spinner content color.
+         */
+        "color"?: string;
+        /**
+          * Sets the diameter of the circle in pixels, Defaults to `32`
+         */
+        "size"?: number | string;
+        /**
+          * Sets the stroke of the circle (border) in pixels, Defaults to `4`
+         */
+        "width"?: number | string;
+    }
+    interface SallaLocalizationModal {
+        /**
+          * Current currency (existing or newly selected)
+         */
+        "currency"?: string;
+        /**
+          * Current language (existing or newly selected)
+         */
+        "language"?: string;
+    }
+    interface SallaLoginModal {
+        /**
+          * Does the merchant allow to login using email
+         */
+        "isEmailAllowed"?: boolean;
+        /**
+          * Does the merchant require registration with email & mobile
+         */
+        "isEmailRequired"?: boolean;
+        /**
+          * Does the merchant/current location for visitor allow to login using mobile, By default outside KSA is `false`
+         */
+        "isMobileAllowed"?: boolean;
+        /**
+          * Once the api verify success, it will be login the customer in web pages
+         */
+        "supportWebAuth"?: boolean;
+    }
+    interface SallaLoyalty {
+        /**
+          * Does the merchant allow to login using email
+         */
+        "allowEmail"?: boolean;
+        /**
+          * Does the merchant/current location for visitor allow to login using mobile, By default outside KSA is `false`
+         */
+        "allowMobile"?: boolean;
+        /**
+          * Available customer points with which they can exchange.
+         */
+        "customerPoints"?: number;
+        /**
+          * Message to show for guest users.
+         */
+        "guestMessage"?: string;
+        /**
+          * The exchanged prize point
+         */
+        "prizePoints"?: string | number;
+        /**
+          * The prize title
+         */
+        "prizeTitle"?: string;
+        /**
+          * Does the merchant require registration with email & mobile
+         */
+        "requireEmail"?: boolean;
+    }
+    interface SallaLoyaltyPrizeItem {
+        /**
+          * Prize item to be displayed in this component.
+         */
+        "item"?: Item;
+        /**
+          * Event emmited when the user select this item.
+         */
+        "onPrizeItemSelected"?: (event: SallaLoyaltyPrizeItemCustomEvent<Item>) => void;
+    }
+    interface SallaMaintenanceAlert {
+    }
+    interface SallaMap {
+        /**
+          * Sets google api key value, default Merchant key
+         */
+        "apiKey"?: string;
+        /**
+          * Latitude coordinate, defaults to current user location
+         */
+        "lat"?: number;
+        /**
+          * Longitude coordinate, defaults to current user location
+         */
+        "lng"?: number;
+        /**
+          * Modal Title
+         */
+        "modalTitle"?: string;
+        /**
+          * File input name for the native formData
+         */
+        "name"?: string;
+        /**
+          * Custom DOM event emitter when current location is selected
+         */
+        "onCurrentLocationChanged"?: (event: SallaMapCustomEvent<any>) => void;
+        /**
+          * Event emitted when the input is invalid.
+         */
+        "onInvalidInput"?: (event: SallaMapCustomEvent<any>) => void;
+        /**
+          * Custom DOM event emitter when map is clicked
+         */
+        "onMapClicked"?: (event: SallaMapCustomEvent<any>) => void;
+        /**
+          * Custom DOM event emitter when location is selected
+         */
+        "onSelected"?: (event: SallaMapCustomEvent<any>) => void;
+        /**
+          * Disable or enable actions
+         */
+        "readonly"?: boolean;
+        /**
+          * Set if the location input is required or not
+         */
+        "required"?: boolean;
+        /**
+          * Sets the search bar visibility.
+         */
+        "searchable"?: boolean;
+        /**
+          * Sets map style.
+         */
+        "theme"?: string;
+        /**
+          * Sets start map zoom.
+         */
+        "zoom"?: number;
+    }
+    interface SallaModal {
+        /**
+          * Align modal content to center, defaults to `false`
+         */
+        "centered"?: boolean;
+        /**
+          * open the modal on rendering
+         */
+        "hasSkeleton"?: boolean;
+        /**
+          * Set the style of the header icon.
+         */
+        "iconStyle"?: 'error' | 'success' | 'primary' | 'normal';
+        /**
+          * Sets the modal to be closable. Defaults to `true`
+         */
+        "isClosable"?: boolean;
+        /**
+          * Show loading in the middle
+         */
+        "isLoading"?: boolean;
+        /**
+          * Avoid padding in the modal body or not, defaults to `false`
+         */
+        "noPadding"?: boolean;
+        /**
+          * Event emitted when the modal visibilty is changed.
+         */
+        "onModalVisibilityChanged"?: (event: SallaModalCustomEvent<Boolean>) => void;
+        /**
+          * The position of the modal
+         */
+        "position"?: 'top' | 'middle' | 'bottom';
+        /**
+          * Set modal sub title.
+         */
+        "subTitle"?: string;
+        /**
+          * Show subtitle before the title or not, defaults to `false` (after the title)
+         */
+        "subTitleFirst"?: boolean;
+        /**
+          * open the modal on rendering
+         */
+        "visible"?: boolean;
+        /**
+          * The size of the modal
+         */
+        "width"?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'full';
+    }
+    interface SallaOfferModal {
+    }
+    interface SallaPlaceholder {
+        /**
+          * Defines the alignment of contents. Defaults to [`left`]
+         */
+        "alignment"?: 'left' | 'center' | 'right';
+        /**
+          * Custom icon to display, defaults to [`Inbox`], can be any valid svg icon or inline element with font icon
+         */
+        "icon"?: string;
+        /**
+          * The size of the icon. Defaults to [`md`] = 45px for font icon & width/height: 3.5rem for svg icon
+         */
+        "iconSize"?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | 'xxxl';
+    }
+    interface SallaPriceRange {
+        /**
+          * Currently selected price filter data
+         */
+        "filtersData"?: any;
+        /**
+          * Maximum price threshold value
+         */
+        "maxPrice"?: any;
+        /**
+          * Minimum price threshold value
+         */
+        "minPrice"?: any;
+        /**
+          * Custome event emitted when there is a change in price input.
+         */
+        "onChanged"?: (event: SallaPriceRangeCustomEvent<any>) => void;
+        /**
+          * Product price range filter option object instance
+         */
+        "option"?: Filter;
+    }
+    interface SallaProductAvailability {
+        /**
+          * Notification channels
+         */
+        "channels"?: 'sms' | 'email' | 'sms,email';
+        /**
+          * is current user already subscribed
+         */
+        "isSubscribed"?: boolean;
+        /**
+          * Listen to product options availability.
+         */
+        "notifyOptionsAvailability"?: boolean;
+        /**
+          * product id that can visitor subscribe to its availability notification
+         */
+        "productId"?: number;
+    }
+    interface SallaProductCard {
+        /**
+          * Full image card.
+         */
+        "fullImage"?: boolean;
+        /**
+          * Hide add to cart button.
+         */
+        "hideAddBtn"?: boolean;
+        /**
+          * Horizontal card.
+         */
+        "horizontal"?: boolean;
+        /**
+          * Special card.
+         */
+        "isSpecial"?: boolean;
+        /**
+          * Minimal card.
+         */
+        "minimal"?: boolean;
+        /**
+          * Product information.
+         */
+        "product"?: string;
+        /**
+          * Support shadow on hover.
+         */
+        "shadowOnHover"?: boolean;
+        /**
+          * Show quantity.
+         */
+        "showQuantity"?: boolean;
+    }
+    interface SallaProductOptions {
+        /**
+          * An event that emitted when any option is changed.
+         */
+        "onChanged"?: (event: SallaProductOptionsCustomEvent<any>) => void;
+        /**
+          * Product detail information.
+         */
+        "options"?: string;
+        /**
+          * The id of the product to which the options are going to be fetched for.
+         */
+        "productId"?: number;
+    }
+    interface SallaProductSizeGuide {
+    }
+    interface SallaProductsList {
+        /**
+          * should listen to filters events `salla-filters::changed` and re-render
+         */
+        "filtersResults"?: boolean;
+        /**
+          * Horizontal cards
+         */
+        "horizontalCards"?: boolean;
+        /**
+          * Limit for number of products in the list.
+         */
+        "limit"?: number;
+        /**
+          * Custom event fired when the the products fetched.
+         */
+        "onProductsFetched"?: (event: SallaProductsListCustomEvent<any>) => void;
+        /**
+          * Sorting the list of products
+         */
+        "sortBy"?: string | 'ourSuggest' | 'bestSell' | 'topRated' | 'priceFromTopToLow' | 'priceFromLowToTop';
+        /**
+          * The source of the products list
+          * @type {string}
+         */
+        "source"?: 'categories' | 'latest' | 'related' | 'brands' | 'json' | 'search' | 'tags' | 'selected' | 'offers' | 'landing-page' | 'sales';
+        /**
+          * The source value, cloud be different values as following: - array of ids when `source` in ['categories', 'brands', 'tags', 'selected'] - keyword when `source` = 'search' - products payload when `source` = 'json' - product_id when `source` = 'related'
+          * @type {string}
+         */
+        "sourceValue"?: any;
+    }
+    interface SallaProductsSlider {
+        /**
+          * autoplay option for products slider
+         */
+        "autoplay"?: boolean;
+        /**
+          * Title of the block - works only if slider is true
+          * @type {string}
+          * @default ''
+         */
+        "blockTitle"?: string;
+        /**
+          * Display 'ALL' URL
+          * @type {string}
+          * @default ''
+         */
+        "displayAllUrl"?: string;
+        /**
+          * Limit for number of products in the list.
+         */
+        "limit"?: number;
+        /**
+          * Slider Id, if not provided will be generated automatically
+          * @type {string}
+          * @default ''
+         */
+        "sliderId"?: string;
+        /**
+          * Source of the products, if api will get the products from the API, if json will get the products from the products prop
+          * @type {string}
+          * @default ''
+         */
+        "source"?: 'categories' | 'latest' | 'related' | 'brands' | 'json' | 'tags' | 'selected' | 'offers' | 'landing-page';
+        /**
+          * The source value, cloud be different values as following: - array of ids when `source` in ['categories', 'brands', 'tags', 'selected'] - products payload when `source` = 'json' - product_id when `source` = 'related'
+          * @type {string}
+         */
+        "sourceValue"?: string;
+        /**
+          * Sub title of the block - works only if slider is true
+          * @type {string}
+          * @default ''
+         */
+        "subTitle"?: string;
+    }
+    interface SallaProgressBar {
+        /**
+          * Progress bar color, defaults to: `salla.config.get('theme.color.primary', "#ffd5c4")`
+         */
+        "color"?: string;
+        /**
+          * You can just pass the donation as json string ex: `{"target_message":null,"target_date":"2023-04-18","target_end_date":"2023-04-18","target_amount":400,"collected_amount":380,"can_donate":true}`
+         */
+        "donation"?: string | Donation;
+        /**
+          * Big Title, before the progress bar.
+         */
+        "header"?: string;
+        /**
+          * Set height for the wrapper.
+         */
+        "height"?: string;
+        /**
+          * Subtitle under the progress bar or instead of it if the target not being set.
+         */
+        "message"?: string;
+        /**
+          * Stripped effect for tje progress bar.
+         */
+        "stripped"?: boolean;
+        /**
+          * The goal of the progress bar
+         */
+        "target"?: number;
+        /**
+          * The unite to be added after the numbers, defaults to: `salla.config.currency().symbol`
+         */
+        "unit"?: string;
+        /**
+          * The progress so far as of the goal.
+         */
+        "value"?: number;
+    }
+    interface SallaQuantityInput {
+        /**
+          * Cart Item Id
+         */
+        "cartItemId"?: any;
+    }
+    interface SallaQuickBuy {
+        /**
+          * Product amount in base currency (SAR).
+          * @type {number}
+          * @default 0
+         */
+        "amount"?: number;
+        /**
+          * base currency
+          * @type {string}
+          * @default SAR
+         */
+        "currency"?: string;
+        /**
+          * To be passed to purchaseNow request
+          * @type {boolean}
+         */
+        "isRequireShipping"?: boolean;
+        /**
+          * Product options, if is empty will get the data from the document.querySelector('salla-product-options[product-id="X"]')
+          * @type {object}
+          * @default {}
+         */
+        "options"?: {};
+        /**
+          * Product ID.
+          * @type {string}
+         */
+        "productId"?: string;
+        /**
+          * Button type.
+          * @type {string}
+          * @default buy
+         */
+        "type"?: 'plain' | 'buy' | 'donate' | 'book' | 'pay' | 'order';
+    }
+    interface SallaQuickOrder {
+        /**
+          * agreement text from server or from props
+         */
+        "agreementText"?: string;
+        /**
+          * quick order confirm pay button text
+         */
+        "confirmPayButtonTitle"?: string;
+        /**
+          * is email required
+         */
+        "isEmailRequired"?: boolean;
+        /**
+          * Custome DOM event emitter when order gets submitted successfully.
+         */
+        "onQuickOrderSubmited"?: (event: SallaQuickOrderCustomEvent<any>) => void;
+        /**
+          * quick order pay button text
+         */
+        "payButtonTitle"?: string;
+        /**
+          * product id local or from page
+         */
+        "productId"?: string;
+        /**
+          * Quick Order Style
+         */
+        "quickOrderStyle"?: 'gray' | 'white' | 'default';
+        /**
+          * quick order title
+         */
+        "quickOrderTitle"?: string;
+        /**
+          * quick order sub title
+         */
+        "subTitle"?: string;
+        /**
+          * product id local or from page
+         */
+        "thanksMessage"?: string;
+    }
+    interface SallaRatingModal {
+        /**
+          * The order id, to rate on its products & shipping
+         */
+        "orderId"?: number;
+    }
+    interface SallaRatingStars {
+        /**
+          * Sets input name.
+         */
+        "name"?: string;
+        /**
+          * Number of reviews to display.
+         */
+        "reviews"?: number;
+        /**
+          * Sets the height and width of the component. Defaults to medium.
+         */
+        "size"?: "large" | "medium" | "small" | "mini";
+        /**
+          * The rating value.
+         */
+        "value"?: number;
+    }
+    interface SallaScopes {
+        /**
+          * Dictates when to show the search field
+         */
+        "searchDisplayLimit"?: number;
+        /**
+          * Optionally open the modal or enforce the pop-up to the viewer
+         */
+        "selection"?: 'optional' | 'mandatory';
+    }
+    interface SallaSearch {
+        /**
+          * Sets the height of the input
+         */
+        "height"?: number;
+        /**
+          * Set the component display without modal window. Defaults to `false`
+         */
+        "inline"?: boolean;
+        /**
+          * Adds a border radius to the input. Half of the height.
+         */
+        "oval"?: boolean;
+    }
+    interface SallaSkeleton {
+        /**
+          * Set the skeleton height
+         */
+        "height"?: string;
+        /**
+          * Set the shape type of the skeleton is it circle or normal
+         */
+        "type"?: 'circle' | 'normal';
+        /**
+          * Set the skeleton width
+         */
+        "width"?: string;
+    }
+    interface SallaSlider {
+        /**
+          * Show/hide display all button beside arrows
+         */
+        "arrowsCentered"?: boolean;
+        /**
+          * Auto Height slider
+         */
+        "autoHeight"?: boolean;
+        /**
+          * Enable autoplay  - working with `type="carousel" only`
+         */
+        "autoPlay"?: boolean;
+        /**
+          * Show/hide slider block sub title
+         */
+        "blockSubtitle"?: string;
+        /**
+          * Show/hide slider block title
+         */
+        "blockTitle"?: string;
+        /**
+          * Enable center mode  - working with `type="carousel" only`
+         */
+        "centered"?: boolean;
+        /**
+          * Show/hide arrows
+         */
+        "controlsOuter"?: boolean;
+        /**
+          * Slider direction. Default: document.documentElement.dir
+         */
+        "direction"?: string;
+        /**
+          * Show/hide display all button beside arrows
+         */
+        "displayAllUrl"?: string;
+        /**
+          * Disable thumbs slider and show it as a grid
+         */
+        "gridThumbs"?: boolean;
+        /**
+          * Enable call a specific slide by index from thumbnails option in `salla-slider-options` component, works only if `data-img-id` and `data-slid-index` attributes are set on each slide
+         */
+        "listenToThumbnailsOption"?: boolean;
+        /**
+          * Run slider in loop, Don't use it for slides with custom components inside it, because it may cause re-render issue
+         */
+        "loop"?: boolean;
+        /**
+          * Event will fired right after initialization.
+         */
+        "onAfterInit"?: (event: SallaSliderCustomEvent<any>) => void;
+        /**
+          * Event will be fired when Swiper reach its beginning (initial position)
+         */
+        "onReachBeginning"?: (event: SallaSliderCustomEvent<any>) => void;
+        /**
+          * Event will be fired when Swiper reach last slide
+         */
+        "onReachEnd"?: (event: SallaSliderCustomEvent<any>) => void;
+        /**
+          * Event will be fired when currently active slide is changed
+         */
+        "onSlideChange"?: (event: SallaSliderCustomEvent<any>) => void;
+        /**
+          * Event will be fired after animation to other slide (next or previous).
+         */
+        "onSlideChangeTransitionEnd"?: (event: SallaSliderCustomEvent<any>) => void;
+        /**
+          * Event will be fired in the beginning of animation to other slide (next or previous).
+         */
+        "onSlideChangeTransitionStart"?: (event: SallaSliderCustomEvent<any>) => void;
+        /**
+          * Same as "slideChangeTransitionEnd" but for "forward" direction only
+         */
+        "onSlideNextTransitionEnd"?: (event: SallaSliderCustomEvent<any>) => void;
+        /**
+          * Same as "slideChangeTransitionStart" but for "forward" direction only
+         */
+        "onSlideNextTransitionStart"?: (event: SallaSliderCustomEvent<any>) => void;
+        /**
+          * Same as "slideChangeTransitionEnd" but for "backward" direction only
+         */
+        "onSlidePrevTransitionEnd"?: (event: SallaSliderCustomEvent<any>) => void;
+        /**
+          * Same as "slideChangeTransitionStart" but for "backward" direction only
+         */
+        "onSlidePrevTransitionStart"?: (event: SallaSliderCustomEvent<any>) => void;
+        /**
+          * Event will be fired when user touch and move finger over Swiper and move it. Receives touchmove event as an arguments.
+         */
+        "onSliderMove"?: (event: SallaSliderCustomEvent<any>) => void;
+        /**
+          * Event will be fired after transition.
+         */
+        "onSliderTransitionEnd"?: (event: SallaSliderCustomEvent<any>) => void;
+        /**
+          * Event will be fired in the beginning of transition.
+         */
+        "onSliderTransitionStart"?: (event: SallaSliderCustomEvent<any>) => void;
+        /**
+          * Event will be fired when user release Swiper. Receives touchend event as an arguments.
+         */
+        "onTouchSliderEnd"?: (event: SallaSliderCustomEvent<any>) => void;
+        /**
+          * Event will be fired when user touch and move finger over Swiper. Receives touchmove event as an arguments.
+         */
+        "onTouchSliderMove"?: (event: SallaSliderCustomEvent<any>) => void;
+        /**
+          * Event will be fired when user touch Swiper. Receives touchstart event as an arguments.
+         */
+        "onTouchSliderStart"?: (event: SallaSliderCustomEvent<any>) => void;
+        /**
+          * Enable pagination
+         */
+        "pagination"?: boolean;
+        /**
+          * Show/hide arrows
+         */
+        "showControls"?: boolean;
+        /**
+          * Show/hide thumbs slider arrows
+         */
+        "showThumbsControls"?: boolean;
+        /**
+          * Slider Configs refer to https://swiperjs.com/swiper-api#parameters and pass the entire config object
+          * @example let slider = document.querySelector('salla-slider');  slider.sliderConfig = {  slidesPerView: 1,  spaceBetween : 30,  lazy: true, }
+         */
+        "sliderConfig"?: any;
+        /**
+          * slidesPerView
+         */
+        "slidesPerView"?: string;
+        /**
+          * Thumbs Slider Configs refer to https://swiperjs.com/swiper-api#parameters and pass the entire config object
+          * @example let slider = document.querySelector('salla-slider');  slider.thumbsConfig = {  slidesPerView: 1,  spaceBetween : 30,  lazy: true, }
+         */
+        "thumbsConfig"?: any;
+        /**
+          * Set the type of the slider Default: ''
+         */
+        "type"?: 'carousel' | 'fullscreen' | 'thumbs' | 'default' | 'hero' | 'testimonials' | 'blog' | 'fullwidth' | '';
+        /**
+          * Vertical or Horizontal main slider
+         */
+        "vertical"?: boolean;
+        /**
+          * Vertical or Horizontal thumbs slider
+         */
+        "verticalThumbs"?: boolean;
+    }
+    interface SallaSocialShare {
+        /**
+          * selected platforms to share | all platforms
+         */
+        "platforms"?: string;
+        /**
+          * page url that will be shared custom | current page url
+         */
+        "url"?: string;
+        /**
+          * page url name that will be shared custom | current page url
+         */
+        "urlName"?: string;
+    }
+    interface SallaTabContent {
+        /**
+          * Set name of the tab content. Mainly used as a key to s ynchronize the content with it's respective header.
+         */
+        "name"?: string;
+    }
+    interface SallaTabHeader {
+        /**
+          * The class applied to the currently active(selected) tab
+         */
+        "activeClass"?: string;
+        /**
+          * Center tab items in the given flex.
+         */
+        "centered"?: boolean;
+        /**
+          * Set the height of the tab bar
+         */
+        "height"?: number | string;
+        /**
+          * Header identifier name to sync with the content.
+         */
+        "name"?: string;
+        /**
+          * Emits event object when clicked or selected.
+         */
+        "onTabSelected"?: (event: SallaTabHeaderCustomEvent<any>) => void;
+    }
+    interface SallaTabs {
+        /**
+          * Background color
+         */
+        "backgroundColor"?: string;
+        /**
+          * Align tabs vertically.
+         */
+        "vertical"?: boolean;
+    }
+    interface SallaTelInput {
+        /**
+          * Current country_code
+         */
+        "countryCode"?: string;
+        /**
+          * input name
+         */
+        "name"?: string;
+        /**
+          * Event emmitted when user enters a phone number.
+         */
+        "onPhoneEntered"?: (event: SallaTelInputCustomEvent<Phone>) => void;
+        /**
+          * Current mobile number
+         */
+        "phone"?: string;
+    }
+    interface SallaUserMenu {
+        /**
+          * To display the trigger as an avatar only
+         */
+        "avatarOnly"?: boolean;
+        /**
+          * To display only the list without the dropdown functionality
+         */
+        "inline"?: boolean;
+        /**
+          * To Make the dropdown menu relative to parent element or not
+         */
+        "relativeDropdown"?: boolean;
+        /**
+          * To display the dropdown header in mobile sheet
+         */
+        "showHeader"?: boolean;
+    }
+    interface SallaUserSettings {
+        /**
+          * Value used for handling notification toggle check box.
+         */
+        "isNotifiable"?: boolean;
+    }
+    interface SallaVerify {
+        /**
+          * should auto reloading the page after success verification
+         */
+        "autoReload"?: boolean;
+        /**
+          * Should render component without modal
+         */
+        "display"?: 'inline' | 'modal';
+        /**
+          * Event when success verification
+         */
+        "onVerified"?: (event: SallaVerifyCustomEvent<any>) => void;
+        /**
+          * Once the api verify success, it will be login the customer in web pages
+         */
+        "supportWebAuth"?: boolean;
+        /**
+          * Verifying method
+         */
+        "type"?: 'mobile' | 'email';
     }
     interface IntrinsicElements {
-        "my-component": MyComponent;
+        "salla-add-product-button": SallaAddProductButton;
+        "salla-bottom-alert": SallaBottomAlert;
+        "salla-button": SallaButton;
+        "salla-cart-summary": SallaCartSummary;
+        "salla-color-picker": SallaColorPicker;
+        "salla-comment-form": SallaCommentForm;
+        "salla-conditional-fields": SallaConditionalFields;
+        "salla-count-down": SallaCountDown;
+        "salla-datetime-picker": SallaDatetimePicker;
+        "salla-file-upload": SallaFileUpload;
+        "salla-filters": SallaFilters;
+        "salla-filters-widget": SallaFiltersWidget;
+        "salla-gifting": SallaGifting;
+        "salla-infinite-scroll": SallaInfiniteScroll;
+        "salla-installment": SallaInstallment;
+        "salla-list-tile": SallaListTile;
+        "salla-loading": SallaLoading;
+        "salla-localization-modal": SallaLocalizationModal;
+        "salla-login-modal": SallaLoginModal;
+        "salla-loyalty": SallaLoyalty;
+        "salla-loyalty-prize-item": SallaLoyaltyPrizeItem;
+        "salla-maintenance-alert": SallaMaintenanceAlert;
+        "salla-map": SallaMap;
+        "salla-modal": SallaModal;
+        "salla-offer-modal": SallaOfferModal;
+        "salla-placeholder": SallaPlaceholder;
+        "salla-price-range": SallaPriceRange;
+        "salla-product-availability": SallaProductAvailability;
+        "salla-product-card": SallaProductCard;
+        "salla-product-options": SallaProductOptions;
+        "salla-product-size-guide": SallaProductSizeGuide;
+        "salla-products-list": SallaProductsList;
+        "salla-products-slider": SallaProductsSlider;
+        "salla-progress-bar": SallaProgressBar;
+        "salla-quantity-input": SallaQuantityInput;
+        "salla-quick-buy": SallaQuickBuy;
+        "salla-quick-order": SallaQuickOrder;
+        "salla-rating-modal": SallaRatingModal;
+        "salla-rating-stars": SallaRatingStars;
+        "salla-scopes": SallaScopes;
+        "salla-search": SallaSearch;
+        "salla-skeleton": SallaSkeleton;
+        "salla-slider": SallaSlider;
+        "salla-social-share": SallaSocialShare;
+        "salla-tab-content": SallaTabContent;
+        "salla-tab-header": SallaTabHeader;
+        "salla-tabs": SallaTabs;
+        "salla-tel-input": SallaTelInput;
+        "salla-user-menu": SallaUserMenu;
+        "salla-user-settings": SallaUserSettings;
+        "salla-verify": SallaVerify;
     }
 }
 export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
-            "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
+            "salla-add-product-button": LocalJSX.SallaAddProductButton & JSXBase.HTMLAttributes<HTMLSallaAddProductButtonElement>;
+            "salla-bottom-alert": LocalJSX.SallaBottomAlert & JSXBase.HTMLAttributes<HTMLSallaBottomAlertElement>;
+            "salla-button": LocalJSX.SallaButton & JSXBase.HTMLAttributes<HTMLSallaButtonElement>;
+            "salla-cart-summary": LocalJSX.SallaCartSummary & JSXBase.HTMLAttributes<HTMLSallaCartSummaryElement>;
+            "salla-color-picker": LocalJSX.SallaColorPicker & JSXBase.HTMLAttributes<HTMLSallaColorPickerElement>;
+            "salla-comment-form": LocalJSX.SallaCommentForm & JSXBase.HTMLAttributes<HTMLSallaCommentFormElement>;
+            /**
+             * its to easy to use, currenlty its support select & checkbox input as trigger for show/hide the dom
+             * the dom you can put it like this data-show-when="{name of the field} {= or !=} {value of the field}"
+             */
+            "salla-conditional-fields": LocalJSX.SallaConditionalFields & JSXBase.HTMLAttributes<HTMLSallaConditionalFieldsElement>;
+            "salla-count-down": LocalJSX.SallaCountDown & JSXBase.HTMLAttributes<HTMLSallaCountDownElement>;
+            "salla-datetime-picker": LocalJSX.SallaDatetimePicker & JSXBase.HTMLAttributes<HTMLSallaDatetimePickerElement>;
+            "salla-file-upload": LocalJSX.SallaFileUpload & JSXBase.HTMLAttributes<HTMLSallaFileUploadElement>;
+            "salla-filters": LocalJSX.SallaFilters & JSXBase.HTMLAttributes<HTMLSallaFiltersElement>;
+            "salla-filters-widget": LocalJSX.SallaFiltersWidget & JSXBase.HTMLAttributes<HTMLSallaFiltersWidgetElement>;
+            "salla-gifting": LocalJSX.SallaGifting & JSXBase.HTMLAttributes<HTMLSallaGiftingElement>;
+            "salla-infinite-scroll": LocalJSX.SallaInfiniteScroll & JSXBase.HTMLAttributes<HTMLSallaInfiniteScrollElement>;
+            "salla-installment": LocalJSX.SallaInstallment & JSXBase.HTMLAttributes<HTMLSallaInstallmentElement>;
+            "salla-list-tile": LocalJSX.SallaListTile & JSXBase.HTMLAttributes<HTMLSallaListTileElement>;
+            "salla-loading": LocalJSX.SallaLoading & JSXBase.HTMLAttributes<HTMLSallaLoadingElement>;
+            "salla-localization-modal": LocalJSX.SallaLocalizationModal & JSXBase.HTMLAttributes<HTMLSallaLocalizationModalElement>;
+            "salla-login-modal": LocalJSX.SallaLoginModal & JSXBase.HTMLAttributes<HTMLSallaLoginModalElement>;
+            "salla-loyalty": LocalJSX.SallaLoyalty & JSXBase.HTMLAttributes<HTMLSallaLoyaltyElement>;
+            "salla-loyalty-prize-item": LocalJSX.SallaLoyaltyPrizeItem & JSXBase.HTMLAttributes<HTMLSallaLoyaltyPrizeItemElement>;
+            "salla-maintenance-alert": LocalJSX.SallaMaintenanceAlert & JSXBase.HTMLAttributes<HTMLSallaMaintenanceAlertElement>;
+            "salla-map": LocalJSX.SallaMap & JSXBase.HTMLAttributes<HTMLSallaMapElement>;
+            "salla-modal": LocalJSX.SallaModal & JSXBase.HTMLAttributes<HTMLSallaModalElement>;
+            "salla-offer-modal": LocalJSX.SallaOfferModal & JSXBase.HTMLAttributes<HTMLSallaOfferModalElement>;
+            "salla-placeholder": LocalJSX.SallaPlaceholder & JSXBase.HTMLAttributes<HTMLSallaPlaceholderElement>;
+            "salla-price-range": LocalJSX.SallaPriceRange & JSXBase.HTMLAttributes<HTMLSallaPriceRangeElement>;
+            "salla-product-availability": LocalJSX.SallaProductAvailability & JSXBase.HTMLAttributes<HTMLSallaProductAvailabilityElement>;
+            "salla-product-card": LocalJSX.SallaProductCard & JSXBase.HTMLAttributes<HTMLSallaProductCardElement>;
+            "salla-product-options": LocalJSX.SallaProductOptions & JSXBase.HTMLAttributes<HTMLSallaProductOptionsElement>;
+            "salla-product-size-guide": LocalJSX.SallaProductSizeGuide & JSXBase.HTMLAttributes<HTMLSallaProductSizeGuideElement>;
+            "salla-products-list": LocalJSX.SallaProductsList & JSXBase.HTMLAttributes<HTMLSallaProductsListElement>;
+            "salla-products-slider": LocalJSX.SallaProductsSlider & JSXBase.HTMLAttributes<HTMLSallaProductsSliderElement>;
+            "salla-progress-bar": LocalJSX.SallaProgressBar & JSXBase.HTMLAttributes<HTMLSallaProgressBarElement>;
+            "salla-quantity-input": LocalJSX.SallaQuantityInput & JSXBase.HTMLAttributes<HTMLSallaQuantityInputElement>;
+            "salla-quick-buy": LocalJSX.SallaQuickBuy & JSXBase.HTMLAttributes<HTMLSallaQuickBuyElement>;
+            "salla-quick-order": LocalJSX.SallaQuickOrder & JSXBase.HTMLAttributes<HTMLSallaQuickOrderElement>;
+            "salla-rating-modal": LocalJSX.SallaRatingModal & JSXBase.HTMLAttributes<HTMLSallaRatingModalElement>;
+            "salla-rating-stars": LocalJSX.SallaRatingStars & JSXBase.HTMLAttributes<HTMLSallaRatingStarsElement>;
+            "salla-scopes": LocalJSX.SallaScopes & JSXBase.HTMLAttributes<HTMLSallaScopesElement>;
+            "salla-search": LocalJSX.SallaSearch & JSXBase.HTMLAttributes<HTMLSallaSearchElement>;
+            "salla-skeleton": LocalJSX.SallaSkeleton & JSXBase.HTMLAttributes<HTMLSallaSkeletonElement>;
+            "salla-slider": LocalJSX.SallaSlider & JSXBase.HTMLAttributes<HTMLSallaSliderElement>;
+            "salla-social-share": LocalJSX.SallaSocialShare & JSXBase.HTMLAttributes<HTMLSallaSocialShareElement>;
+            "salla-tab-content": LocalJSX.SallaTabContent & JSXBase.HTMLAttributes<HTMLSallaTabContentElement>;
+            "salla-tab-header": LocalJSX.SallaTabHeader & JSXBase.HTMLAttributes<HTMLSallaTabHeaderElement>;
+            "salla-tabs": LocalJSX.SallaTabs & JSXBase.HTMLAttributes<HTMLSallaTabsElement>;
+            "salla-tel-input": LocalJSX.SallaTelInput & JSXBase.HTMLAttributes<HTMLSallaTelInputElement>;
+            "salla-user-menu": LocalJSX.SallaUserMenu & JSXBase.HTMLAttributes<HTMLSallaUserMenuElement>;
+            "salla-user-settings": LocalJSX.SallaUserSettings & JSXBase.HTMLAttributes<HTMLSallaUserSettingsElement>;
+            "salla-verify": LocalJSX.SallaVerify & JSXBase.HTMLAttributes<HTMLSallaVerifyElement>;
         }
     }
 }

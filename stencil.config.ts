@@ -2,6 +2,7 @@ import { Config } from '@stencil/core';
 
 export const config: Config = {
   namespace: 'twilight-components',
+  globalScript: 'src/global/app-dev.ts',
   outputTargets: [
     {
       type: 'dist',
