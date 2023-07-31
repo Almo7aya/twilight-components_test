@@ -1079,7 +1079,7 @@ export namespace Components {
          */
         "productId": number;
     }
-    interface SallaProductCard {
+    interface SallaProductCard2 {
         /**
           * Full image card.
          */
@@ -1991,11 +1991,11 @@ declare global {
         prototype: HTMLSallaProductAvailabilityElement;
         new (): HTMLSallaProductAvailabilityElement;
     };
-    interface HTMLSallaProductCardElement extends Components.SallaProductCard, HTMLStencilElement {
+    interface HTMLSallaProductCard2Element extends Components.SallaProductCard2, HTMLStencilElement {
     }
-    var HTMLSallaProductCardElement: {
-        prototype: HTMLSallaProductCardElement;
-        new (): HTMLSallaProductCardElement;
+    var HTMLSallaProductCard2Element: {
+        prototype: HTMLSallaProductCard2Element;
+        new (): HTMLSallaProductCard2Element;
     };
     interface HTMLSallaProductOptionsElement extends Components.SallaProductOptions, HTMLStencilElement {
     }
@@ -2158,7 +2158,7 @@ declare global {
         "salla-placeholder": HTMLSallaPlaceholderElement;
         "salla-price-range": HTMLSallaPriceRangeElement;
         "salla-product-availability": HTMLSallaProductAvailabilityElement;
-        "salla-product-card": HTMLSallaProductCardElement;
+        "salla-product-card2": HTMLSallaProductCard2Element;
         "salla-product-options": HTMLSallaProductOptionsElement;
         "salla-product-size-guide": HTMLSallaProductSizeGuideElement;
         "salla-products-list": HTMLSallaProductsListElement;
@@ -3157,7 +3157,7 @@ declare namespace LocalJSX {
          */
         "productId"?: number;
     }
-    interface SallaProductCard {
+    interface SallaProductCard2 {
         /**
           * Full image card.
          */
@@ -3765,7 +3765,7 @@ declare namespace LocalJSX {
         "salla-placeholder": SallaPlaceholder;
         "salla-price-range": SallaPriceRange;
         "salla-product-availability": SallaProductAvailability;
-        "salla-product-card": SallaProductCard;
+        "salla-product-card2": SallaProductCard2;
         "salla-product-options": SallaProductOptions;
         "salla-product-size-guide": SallaProductSizeGuide;
         "salla-products-list": SallaProductsList;
@@ -3826,7 +3826,7 @@ declare module "@stencil/core" {
             "salla-placeholder": LocalJSX.SallaPlaceholder & JSXBase.HTMLAttributes<HTMLSallaPlaceholderElement>;
             "salla-price-range": LocalJSX.SallaPriceRange & JSXBase.HTMLAttributes<HTMLSallaPriceRangeElement>;
             "salla-product-availability": LocalJSX.SallaProductAvailability & JSXBase.HTMLAttributes<HTMLSallaProductAvailabilityElement>;
-            "salla-product-card": LocalJSX.SallaProductCard & JSXBase.HTMLAttributes<HTMLSallaProductCardElement>;
+            "salla-product-card2": LocalJSX.SallaProductCard2 & JSXBase.HTMLAttributes<HTMLSallaProductCard2Element>;
             "salla-product-options": LocalJSX.SallaProductOptions & JSXBase.HTMLAttributes<HTMLSallaProductOptionsElement>;
             "salla-product-size-guide": LocalJSX.SallaProductSizeGuide & JSXBase.HTMLAttributes<HTMLSallaProductSizeGuideElement>;
             "salla-products-list": LocalJSX.SallaProductsList & JSXBase.HTMLAttributes<HTMLSallaProductsListElement>;
