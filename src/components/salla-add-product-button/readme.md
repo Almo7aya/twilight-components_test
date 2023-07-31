@@ -33,7 +33,7 @@
 
 ### Used by
 
- - [salla-product-card2](../salla-product-card)
+ - [salla-product-card](../salla-product-card)
 
 ### Depends on
 
@@ -52,7 +52,7 @@ graph TD;
   salla-product-availability --> salla-tel-input
   salla-modal --> salla-loading
   salla-quick-buy --> salla-button
-  salla-product-card2 --> salla-add-product-button
+  salla-product-card --> salla-add-product-button
   style salla-add-product-button fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

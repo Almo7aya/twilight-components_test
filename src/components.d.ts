@@ -1079,7 +1079,7 @@ export namespace Components {
          */
         "productId": number;
     }
-    interface SallaProductCard2 {
+    interface SallaProductCard {
         /**
           * Full image card.
          */
@@ -1697,6 +1697,8 @@ export namespace Components {
          */
         "phone": string;
     }
+    interface SallaTest {
+    }
     interface SallaUserMenu {
         /**
           * To display the trigger as an avatar only
@@ -1991,11 +1993,11 @@ declare global {
         prototype: HTMLSallaProductAvailabilityElement;
         new (): HTMLSallaProductAvailabilityElement;
     };
-    interface HTMLSallaProductCard2Element extends Components.SallaProductCard2, HTMLStencilElement {
+    interface HTMLSallaProductCardElement extends Components.SallaProductCard, HTMLStencilElement {
     }
-    var HTMLSallaProductCard2Element: {
-        prototype: HTMLSallaProductCard2Element;
-        new (): HTMLSallaProductCard2Element;
+    var HTMLSallaProductCardElement: {
+        prototype: HTMLSallaProductCardElement;
+        new (): HTMLSallaProductCardElement;
     };
     interface HTMLSallaProductOptionsElement extends Components.SallaProductOptions, HTMLStencilElement {
     }
@@ -2111,6 +2113,12 @@ declare global {
         prototype: HTMLSallaTelInputElement;
         new (): HTMLSallaTelInputElement;
     };
+    interface HTMLSallaTestElement extends Components.SallaTest, HTMLStencilElement {
+    }
+    var HTMLSallaTestElement: {
+        prototype: HTMLSallaTestElement;
+        new (): HTMLSallaTestElement;
+    };
     interface HTMLSallaUserMenuElement extends Components.SallaUserMenu, HTMLStencilElement {
     }
     var HTMLSallaUserMenuElement: {
@@ -2158,7 +2166,7 @@ declare global {
         "salla-placeholder": HTMLSallaPlaceholderElement;
         "salla-price-range": HTMLSallaPriceRangeElement;
         "salla-product-availability": HTMLSallaProductAvailabilityElement;
-        "salla-product-card2": HTMLSallaProductCard2Element;
+        "salla-product-card": HTMLSallaProductCardElement;
         "salla-product-options": HTMLSallaProductOptionsElement;
         "salla-product-size-guide": HTMLSallaProductSizeGuideElement;
         "salla-products-list": HTMLSallaProductsListElement;
@@ -2178,6 +2186,7 @@ declare global {
         "salla-tab-header": HTMLSallaTabHeaderElement;
         "salla-tabs": HTMLSallaTabsElement;
         "salla-tel-input": HTMLSallaTelInputElement;
+        "salla-test": HTMLSallaTestElement;
         "salla-user-menu": HTMLSallaUserMenuElement;
         "salla-user-settings": HTMLSallaUserSettingsElement;
         "salla-verify": HTMLSallaVerifyElement;
@@ -3157,7 +3166,7 @@ declare namespace LocalJSX {
          */
         "productId"?: number;
     }
-    interface SallaProductCard2 {
+    interface SallaProductCard {
         /**
           * Full image card.
          */
@@ -3690,6 +3699,8 @@ declare namespace LocalJSX {
          */
         "phone"?: string;
     }
+    interface SallaTest {
+    }
     interface SallaUserMenu {
         /**
           * To display the trigger as an avatar only
@@ -3765,7 +3776,7 @@ declare namespace LocalJSX {
         "salla-placeholder": SallaPlaceholder;
         "salla-price-range": SallaPriceRange;
         "salla-product-availability": SallaProductAvailability;
-        "salla-product-card2": SallaProductCard2;
+        "salla-product-card": SallaProductCard;
         "salla-product-options": SallaProductOptions;
         "salla-product-size-guide": SallaProductSizeGuide;
         "salla-products-list": SallaProductsList;
@@ -3785,6 +3796,7 @@ declare namespace LocalJSX {
         "salla-tab-header": SallaTabHeader;
         "salla-tabs": SallaTabs;
         "salla-tel-input": SallaTelInput;
+        "salla-test": SallaTest;
         "salla-user-menu": SallaUserMenu;
         "salla-user-settings": SallaUserSettings;
         "salla-verify": SallaVerify;
@@ -3826,7 +3838,7 @@ declare module "@stencil/core" {
             "salla-placeholder": LocalJSX.SallaPlaceholder & JSXBase.HTMLAttributes<HTMLSallaPlaceholderElement>;
             "salla-price-range": LocalJSX.SallaPriceRange & JSXBase.HTMLAttributes<HTMLSallaPriceRangeElement>;
             "salla-product-availability": LocalJSX.SallaProductAvailability & JSXBase.HTMLAttributes<HTMLSallaProductAvailabilityElement>;
-            "salla-product-card2": LocalJSX.SallaProductCard2 & JSXBase.HTMLAttributes<HTMLSallaProductCard2Element>;
+            "salla-product-card": LocalJSX.SallaProductCard & JSXBase.HTMLAttributes<HTMLSallaProductCardElement>;
             "salla-product-options": LocalJSX.SallaProductOptions & JSXBase.HTMLAttributes<HTMLSallaProductOptionsElement>;
             "salla-product-size-guide": LocalJSX.SallaProductSizeGuide & JSXBase.HTMLAttributes<HTMLSallaProductSizeGuideElement>;
             "salla-products-list": LocalJSX.SallaProductsList & JSXBase.HTMLAttributes<HTMLSallaProductsListElement>;
@@ -3846,6 +3858,7 @@ declare module "@stencil/core" {
             "salla-tab-header": LocalJSX.SallaTabHeader & JSXBase.HTMLAttributes<HTMLSallaTabHeaderElement>;
             "salla-tabs": LocalJSX.SallaTabs & JSXBase.HTMLAttributes<HTMLSallaTabsElement>;
             "salla-tel-input": LocalJSX.SallaTelInput & JSXBase.HTMLAttributes<HTMLSallaTelInputElement>;
+            "salla-test": LocalJSX.SallaTest & JSXBase.HTMLAttributes<HTMLSallaTestElement>;
             "salla-user-menu": LocalJSX.SallaUserMenu & JSXBase.HTMLAttributes<HTMLSallaUserMenuElement>;
             "salla-user-settings": LocalJSX.SallaUserSettings & JSXBase.HTMLAttributes<HTMLSallaUserSettingsElement>;
             "salla-verify": LocalJSX.SallaVerify & JSXBase.HTMLAttributes<HTMLSallaVerifyElement>;

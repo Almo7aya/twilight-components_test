@@ -88,7 +88,7 @@ Type: `Promise<HTMLElement>`
  - [salla-map](../salla-map)
  - [salla-offer-modal](../salla-offer-modal)
  - [salla-product-availability](../salla-product-availability)
- - [salla-product-card2](../salla-product-card)
+ - [salla-product-card](../salla-product-card)
  - [salla-quick-buy](../salla-quick-buy)
  - [salla-quick-order](../salla-quick-order)
  - [salla-rating-modal](../salla-rating-modal)
@@ -111,7 +111,7 @@ graph TD;
   salla-map --> salla-button
   salla-offer-modal --> salla-button
   salla-product-availability --> salla-button
-  salla-product-card2 --> salla-button
+  salla-product-card --> salla-button
   salla-quick-buy --> salla-button
   salla-quick-order --> salla-button
   salla-rating-modal --> salla-button

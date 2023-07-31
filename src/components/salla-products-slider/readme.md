@@ -23,12 +23,26 @@
 
 ### Depends on
 
+- [salla-product-card](../salla-product-card)
 - [salla-slider](../salla-slider)
 
 ### Graph
 ```mermaid
 graph TD;
+  salla-products-slider --> salla-product-card
   salla-products-slider --> salla-slider
+  salla-product-card --> salla-button
+  salla-product-card --> salla-progress-bar
+  salla-product-card --> salla-count-down
+  salla-product-card --> salla-add-product-button
+  salla-add-product-button --> salla-product-availability
+  salla-add-product-button --> salla-button
+  salla-add-product-button --> salla-quick-buy
+  salla-product-availability --> salla-button
+  salla-product-availability --> salla-modal
+  salla-product-availability --> salla-tel-input
+  salla-modal --> salla-loading
+  salla-quick-buy --> salla-button
   style salla-products-slider fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

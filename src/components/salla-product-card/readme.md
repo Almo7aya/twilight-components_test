@@ -28,6 +28,10 @@
 
 ## Dependencies
 
+### Used by
+
+ - [salla-products-slider](../salla-products-slider)
+
 ### Depends on
 
 - [salla-button](../salla-button)
@@ -38,10 +42,10 @@
 ### Graph
 ```mermaid
 graph TD;
-  salla-product-card2 --> salla-button
-  salla-product-card2 --> salla-progress-bar
-  salla-product-card2 --> salla-count-down
-  salla-product-card2 --> salla-add-product-button
+  salla-product-card --> salla-button
+  salla-product-card --> salla-progress-bar
+  salla-product-card --> salla-count-down
+  salla-product-card --> salla-add-product-button
   salla-add-product-button --> salla-product-availability
   salla-add-product-button --> salla-button
   salla-add-product-button --> salla-quick-buy
@@ -50,7 +54,8 @@ graph TD;
   salla-product-availability --> salla-tel-input
   salla-modal --> salla-loading
   salla-quick-buy --> salla-button
-  style salla-product-card2 fill:#f9f,stroke:#333,stroke-width:4px
+  salla-products-slider --> salla-product-card
+  style salla-product-card fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
 ----------------------------------------------
