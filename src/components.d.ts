@@ -22,6 +22,78 @@ export { Item, LoyaltyProgram } from "./components/salla-loyalty/loyalty-schema"
 export { Donation, Option } from "./components/salla-product-options/interfaces";
 export { Phone } from "./components/salla-tel-input/interfaces";
 export namespace Components {
+    interface CustomSallaProductCard2 {
+        /**
+          * Full image card.
+         */
+        "fullImage": boolean;
+        /**
+          * Hide add to cart button.
+         */
+        "hideAddBtn": boolean;
+        /**
+          * Horizontal card.
+         */
+        "horizontal": boolean;
+        /**
+          * Special card.
+         */
+        "isSpecial": boolean;
+        /**
+          * Minimal card.
+         */
+        "minimal": boolean;
+        /**
+          * Product information.
+         */
+        "product": string;
+        /**
+          * Support shadow on hover.
+         */
+        "shadowOnHover": boolean;
+        /**
+          * Show quantity.
+         */
+        "showQuantity": boolean;
+    }
+    interface CustomSallaProductsList {
+        "customCardsElementsTag": string;
+        /**
+          * should listen to filters events `salla-filters::changed` and re-render
+         */
+        "filtersResults": boolean;
+        /**
+          * Horizontal cards
+         */
+        "horizontalCards": boolean;
+        /**
+          * Limit for number of products in the list.
+         */
+        "limit": number;
+        /**
+          * Reload the list of products (entire content of the component).
+         */
+        "reload": () => Promise<void>;
+        /**
+          * Set parsed filters data from URI
+          * @param filters
+         */
+        "setFilters": (filters: any) => Promise<void>;
+        /**
+          * Sorting the list of products
+         */
+        "sortBy"?: string | 'ourSuggest' | 'bestSell' | 'topRated' | 'priceFromTopToLow' | 'priceFromLowToTop';
+        /**
+          * The source of the products list
+          * @type {string}
+         */
+        "source": 'categories' | 'latest' | 'related' | 'brands' | 'json' | 'search' | 'tags' | 'selected' | 'offers' | 'landing-page' | 'sales';
+        /**
+          * The source value, cloud be different values as following: - array of ids when `source` in ['categories', 'brands', 'tags', 'selected'] - keyword when `source` = 'search' - products payload when `source` = 'json' - product_id when `source` = 'related'
+          * @type {string}
+         */
+        "sourceValue": any;
+    }
     interface SallaAddProductButton {
         /**
           * Channels.
@@ -1752,6 +1824,10 @@ export namespace Components {
         "type": 'mobile' | 'email';
     }
 }
+export interface CustomSallaProductsListCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLCustomSallaProductsListElement;
+}
 export interface SallaAddProductButtonCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSallaAddProductButtonElement;
@@ -1821,6 +1897,18 @@ export interface SallaVerifyCustomEvent<T> extends CustomEvent<T> {
     target: HTMLSallaVerifyElement;
 }
 declare global {
+    interface HTMLCustomSallaProductCard2Element extends Components.CustomSallaProductCard2, HTMLStencilElement {
+    }
+    var HTMLCustomSallaProductCard2Element: {
+        prototype: HTMLCustomSallaProductCard2Element;
+        new (): HTMLCustomSallaProductCard2Element;
+    };
+    interface HTMLCustomSallaProductsListElement extends Components.CustomSallaProductsList, HTMLStencilElement {
+    }
+    var HTMLCustomSallaProductsListElement: {
+        prototype: HTMLCustomSallaProductsListElement;
+        new (): HTMLCustomSallaProductsListElement;
+    };
     interface HTMLSallaAddProductButtonElement extends Components.SallaAddProductButton, HTMLStencilElement {
     }
     var HTMLSallaAddProductButtonElement: {
@@ -2138,6 +2226,8 @@ declare global {
         new (): HTMLSallaVerifyElement;
     };
     interface HTMLElementTagNameMap {
+        "custom-salla-product-card2": HTMLCustomSallaProductCard2Element;
+        "custom-salla-products-list": HTMLCustomSallaProductsListElement;
         "salla-add-product-button": HTMLSallaAddProductButtonElement;
         "salla-bottom-alert": HTMLSallaBottomAlertElement;
         "salla-button": HTMLSallaButtonElement;
@@ -2193,6 +2283,73 @@ declare global {
     }
 }
 declare namespace LocalJSX {
+    interface CustomSallaProductCard2 {
+        /**
+          * Full image card.
+         */
+        "fullImage"?: boolean;
+        /**
+          * Hide add to cart button.
+         */
+        "hideAddBtn"?: boolean;
+        /**
+          * Horizontal card.
+         */
+        "horizontal"?: boolean;
+        /**
+          * Special card.
+         */
+        "isSpecial"?: boolean;
+        /**
+          * Minimal card.
+         */
+        "minimal"?: boolean;
+        /**
+          * Product information.
+         */
+        "product"?: string;
+        /**
+          * Support shadow on hover.
+         */
+        "shadowOnHover"?: boolean;
+        /**
+          * Show quantity.
+         */
+        "showQuantity"?: boolean;
+    }
+    interface CustomSallaProductsList {
+        "customCardsElementsTag"?: string;
+        /**
+          * should listen to filters events `salla-filters::changed` and re-render
+         */
+        "filtersResults"?: boolean;
+        /**
+          * Horizontal cards
+         */
+        "horizontalCards"?: boolean;
+        /**
+          * Limit for number of products in the list.
+         */
+        "limit"?: number;
+        /**
+          * Custom event fired when the the products fetched.
+         */
+        "onProductsFetched"?: (event: CustomSallaProductsListCustomEvent<any>) => void;
+        /**
+          * Sorting the list of products
+         */
+        "sortBy"?: string | 'ourSuggest' | 'bestSell' | 'topRated' | 'priceFromTopToLow' | 'priceFromLowToTop';
+        /**
+          * The source of the products list
+          * @type {string}
+         */
+        "source"?: 'categories' | 'latest' | 'related' | 'brands' | 'json' | 'search' | 'tags' | 'selected' | 'offers' | 'landing-page' | 'sales';
+        /**
+          * The source value, cloud be different values as following: - array of ids when `source` in ['categories', 'brands', 'tags', 'selected'] - keyword when `source` = 'search' - products payload when `source` = 'json' - product_id when `source` = 'related'
+          * @type {string}
+         */
+        "sourceValue"?: any;
+    }
     interface SallaAddProductButton {
         /**
           * Channels.
@@ -3748,6 +3905,8 @@ declare namespace LocalJSX {
         "type"?: 'mobile' | 'email';
     }
     interface IntrinsicElements {
+        "custom-salla-product-card2": CustomSallaProductCard2;
+        "custom-salla-products-list": CustomSallaProductsList;
         "salla-add-product-button": SallaAddProductButton;
         "salla-bottom-alert": SallaBottomAlert;
         "salla-button": SallaButton;
@@ -3806,6 +3965,8 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            "custom-salla-product-card2": LocalJSX.CustomSallaProductCard2 & JSXBase.HTMLAttributes<HTMLCustomSallaProductCard2Element>;
+            "custom-salla-products-list": LocalJSX.CustomSallaProductsList & JSXBase.HTMLAttributes<HTMLCustomSallaProductsListElement>;
             "salla-add-product-button": LocalJSX.SallaAddProductButton & JSXBase.HTMLAttributes<HTMLSallaAddProductButtonElement>;
             "salla-bottom-alert": LocalJSX.SallaBottomAlert & JSXBase.HTMLAttributes<HTMLSallaBottomAlertElement>;
             "salla-button": LocalJSX.SallaButton & JSXBase.HTMLAttributes<HTMLSallaButtonElement>;

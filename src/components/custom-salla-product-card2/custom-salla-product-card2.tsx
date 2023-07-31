@@ -6,12 +6,12 @@ import Star from '../../assets/svg/star2.svg';
  * @slot add-to-cart-label - Add to cart label.
  */
 @Component({
-  tag: 'salla-product-card',
-  styleUrl: 'salla-product-card.css',
+  tag: 'custom-salla-product-card2',
+  styleUrl: 'custom-salla-product-card2.css',
   assetsDirs: ['assets']
 })
 
-export class SallaProductCard {
+export class CustomSallaProductCard2 {
   constructor() {
     // Store configs
     salla.onReady(() => {
@@ -177,6 +177,7 @@ export class SallaProductCard {
     };
     return (
       <Host id={`product-${this.productData?.id}`} class={classes}>
+        <h1>This is a test</h1>
         <div class={!this.fullImage ? 's-product-card-image' : 's-product-card-image-full'}>
           <a href={this.productData?.url}>
             <img class={`s-product-card-image-${salla.url.is_placeholder(this.productData?.image?.url)

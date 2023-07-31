@@ -36,11 +36,13 @@ Type: `Promise<void>`
 
 ### Used by
 
+ - [custom-salla-product-card2](../custom-salla-product-card2)
  - [salla-product-card](../salla-product-card)
 
 ### Graph
 ```mermaid
 graph TD;
+  custom-salla-product-card2 --> salla-count-down
   salla-product-card --> salla-count-down
   style salla-count-down fill:#f9f,stroke:#333,stroke-width:4px
 ```

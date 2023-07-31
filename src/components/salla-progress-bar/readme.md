@@ -24,12 +24,14 @@
 
 ### Used by
 
+ - [custom-salla-product-card2](../custom-salla-product-card2)
  - [salla-product-card](../salla-product-card)
  - [salla-product-options](../salla-product-options)
 
 ### Graph
 ```mermaid
 graph TD;
+  custom-salla-product-card2 --> salla-progress-bar
   salla-product-card --> salla-progress-bar
   salla-product-options --> salla-progress-bar
   style salla-progress-bar fill:#f9f,stroke:#333,stroke-width:4px

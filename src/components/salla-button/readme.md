@@ -77,6 +77,7 @@ Type: `Promise<HTMLElement>`
 
 ### Used by
 
+ - [custom-salla-product-card2](../custom-salla-product-card2)
  - [salla-add-product-button](../salla-add-product-button)
  - [salla-bottom-alert](../salla-bottom-alert)
  - [salla-comment-form](../salla-comment-form)
@@ -100,6 +101,7 @@ Type: `Promise<HTMLElement>`
 ### Graph
 ```mermaid
 graph TD;
+  custom-salla-product-card2 --> salla-button
   salla-add-product-button --> salla-button
   salla-bottom-alert --> salla-button
   salla-comment-form --> salla-button
