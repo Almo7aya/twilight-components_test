@@ -6,7 +6,7 @@ import Star from '../../assets/svg/star2.svg';
  * @slot add-to-cart-label - Add to cart label.
  */
 @Component({
-  tag: 'salla-product-card',
+  tag: 'salla-product-card2',
   styleUrl: 'salla-product-card.css',
   assetsDirs: ['assets']
 })
